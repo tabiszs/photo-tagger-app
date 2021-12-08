@@ -1,2 +1,3 @@
-# flutter
+# Dokumentacja
 Projekt na przedmiot Flutter
+
