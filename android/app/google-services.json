@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "710836672231",
+    "project_id": "phototagger-c1df1",
+    "storage_bucket": "phototagger-c1df1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710836672231:android:bfd93a06055cbe215cb442",
+        "android_client_info": {
+          "package_name": "pw.edu.photo_tagger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710836672231-gfaibmsibvcqsh8ctcnajofsn8f7vaab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDS6rZQRh69C0L3bjWKjboVfeqFCV0CDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710836672231-gfaibmsibvcqsh8ctcnajofsn8f7vaab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
