@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "710836672231",
-    "project_id": "phototagger-c1df1",
-    "storage_bucket": "phototagger-c1df1.appspot.com"
+    "project_number": "124507357743",
+    "project_id": "photo-tagger-21",
+    "storage_bucket": "photo-tagger-21.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:710836672231:android:bfd93a06055cbe215cb442",
+        "mobilesdk_app_id": "1:124507357743:android:810bf917ea8e275d4ebcda",
         "android_client_info": {
-          "package_name": "pw.edu.photo_tagger"
+          "package_name": "edu.pw.photo_tagger"
         }
       },
       "oauth_client": [
         {
-          "client_id": "710836672231-gfaibmsibvcqsh8ctcnajofsn8f7vaab.apps.googleusercontent.com",
+          "client_id": "124507357743-127hhu5c7r8jl9dffrlaglksqn81hglp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBDS6rZQRh69C0L3bjWKjboVfeqFCV0CDM"
+          "current_key": "AIzaSyAwRpa2LGg2Xmx7yzsjOcj9MFCyi9x1RUU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "710836672231-gfaibmsibvcqsh8ctcnajofsn8f7vaab.apps.googleusercontent.com",
+              "client_id": "124507357743-127hhu5c7r8jl9dffrlaglksqn81hglp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
