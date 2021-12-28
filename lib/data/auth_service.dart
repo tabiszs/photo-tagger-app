@@ -28,7 +28,6 @@ class AuthService {
         email: email,
         password: password,
       );
-
       return SignInResult.success;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
@@ -39,6 +38,8 @@ class AuthService {
       rethrow;
     }
   }
+
+  User? get currentUser => _firebaseAuth.currentUser;
 
   Future<void> signOut() => _firebaseAuth.signOut();
 }

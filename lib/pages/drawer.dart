@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
@@ -8,17 +9,18 @@ import 'add/add_photos_page.dart';
 import 'authenticate/sign_out_page.dart';
 
 class NavDrawer extends StatelessWidget {
-  const NavDrawer({Key? key}) : super(key: key);
+  const NavDrawer({required this.user, Key? key}) : super(key: key);
   final _padding = const EdgeInsets.symmetric(horizontal: 20);
+  final User user;
+
+  final name = 'Jan Kowalski Maria Winae';
+  final email = 'jk@wp.pl-asssssssssssssssaaaaaaaa';
+  //TODO - get propriate image from account
+  final urlImage =
+      'http://uigse-fse.org/wp-content/uploads/2019/08/croix-agse.png';
 
   @override
   Widget build(BuildContext context) {
-    final name = 'Jan Kowalski Maria Winae';
-    final email = 'jk@wp.pl-asssssssssssssssaaaaaaaa';
-    //TODO - get propriate image from account
-    final urlImage =
-        'http://uigse-fse.org/wp-content/uploads/2019/08/croix-agse.png';
-
     return Drawer(
       child: Material(
         color: Theme.of(context).primaryColor,
@@ -28,7 +30,7 @@ class NavDrawer extends StatelessWidget {
             _buildHeader(
               urlImage: urlImage,
               name: name,
-              email: email,
+              email: user.email!,
             ),
             Container(
               padding: _padding,

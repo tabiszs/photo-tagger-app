@@ -7,10 +7,12 @@ import 'package:photo_tagger/pages/authenticate/auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authService})
       : super(authService.isSignedIn
-            ? const SignedInState()
+            ? SignedInState(user: authService.currentUser)
             : const SignedOutState()) {
     _subscription = authService.isSignedInStream.listen((isSignedInEvent) {
-      emit(isSignedInEvent ? const SignedInState() : const SignedOutState());
+      emit(isSignedInEvent
+          ? SignedInState(user: authService.currentUser)
+          : const SignedOutState());
     });
   }
 
@@ -24,10 +26,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result =
           await authService.signInWithEmailAndPassword(email, password);
-
       switch (result) {
         case SignInResult.success:
-          emit(const SignedInState());
+          emit(SignedInState(user: authService.currentUser));
           break;
         case SignInResult.invalidCredentials:
           emit(const SignedOutState(error: 'Nieprawidłowe dane.'));

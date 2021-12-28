@@ -12,7 +12,7 @@ class AuthGate extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
       return state is SignedInState
-          ? const AuthorizedRootPage()
+          ? AuthorizedRootPage(user: state.user)
           : const SignOutPage();
     });
   }
