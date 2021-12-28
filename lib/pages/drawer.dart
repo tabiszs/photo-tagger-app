@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
+import 'package:provider/src/provider.dart';
 
 import 'about/about_app_page.dart';
 import 'add/add_photos_page.dart';
-import 'authenticate/log_in_page.dart';
+import 'authenticate/sign_out_page.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
@@ -69,8 +71,7 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.logout_outlined,
                     text: 'Wyloguj',
-                    onClicked: () =>
-                        _selectedItem(context, MainRoutingMap.LoginPage),
+                    onClicked: context.read<AuthService>().signOut,
                   ),
                 ],
               ),

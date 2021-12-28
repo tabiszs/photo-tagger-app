@@ -23,12 +23,17 @@ class AboutAppPage extends StatelessWidget {
         child: ListView(
           children: [
             Image.asset('assets/images/icon-tagger.jpg'),
-            const SizedBox(height: 30),
-            const Text('Wersja 1.0.0'),
-            const SizedBox(height: 10),
-            const Text('Stanisław Tabisz'),
-            const SizedBox(height: 10),
-            const Text('stanislaw.tabisz@skauci-europy.pl'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SizedBox(height: 30),
+                Text('Wersja 1.0.0'),
+                SizedBox(height: 10),
+                Text('Stanisław Tabisz'),
+                SizedBox(height: 10),
+                Text('stanislaw.tabisz@skauci-europy.pl'),
+              ],
+            )
           ],
         ),
       ),

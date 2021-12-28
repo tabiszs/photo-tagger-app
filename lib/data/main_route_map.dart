@@ -1,4 +1,4 @@
-import 'package:photo_tagger/pages/root.dart';
+import 'package:photo_tagger/pages/app.dart';
 
 class MainRoutingMap {
   static const String RootPage = '/';

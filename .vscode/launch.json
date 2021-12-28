@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "photo-tagger",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "photo-tagger (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "photo-tagger (formatting)",
+            "type": "dart",
+            "dart.lineLength": 150,
+            "[dart]": {
+                "editor.rulers": [
+                    150
+                ],
+            }
+        }
+    ]
+}
