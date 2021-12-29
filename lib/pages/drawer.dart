@@ -13,12 +13,6 @@ class NavDrawer extends StatelessWidget {
   final _padding = const EdgeInsets.symmetric(horizontal: 20);
   final User user;
 
-  final name = 'Jan Kowalski Maria Winae';
-  final email = 'jk@wp.pl-asssssssssssssssaaaaaaaa';
-  //TODO - get propriate image from account
-  final urlImage =
-      'http://uigse-fse.org/wp-content/uploads/2019/08/croix-agse.png';
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -28,9 +22,9 @@ class NavDrawer extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 10),
             _buildHeader(
-              urlImage: urlImage,
-              name: name,
-              email: user.email!,
+              urlImage: getPhotoURL(user),
+              name: getName(user),
+              email: getEmail(user),
             ),
             Container(
               padding: _padding,
@@ -82,6 +76,31 @@ class NavDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getPhotoURL(User user) {
+    const defaultPhotoURL = 'assets/croix-agse/playstore.png';
+    if (user.photoURL == null) {
+      return defaultPhotoURL;
+    } else {
+      return user.photoURL!;
+    }
+  }
+
+  String getName(User user) {
+    if (user.displayName == null) {
+      return '';
+    } else {
+      return user.displayName!;
+    }
+  }
+
+  String getEmail(User user) {
+    if (user.email == null) {
+      return '';
+    } else {
+      return user.email!;
+    }
   }
 
   Widget _buildHeader({
