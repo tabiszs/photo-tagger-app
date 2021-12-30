@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 abstract class AddPhotosState {
   const AddPhotosState();
 }
@@ -7,7 +9,17 @@ class AddPhotosEmpty extends AddPhotosState {
 }
 
 class AddPhotosLoaded extends AddPhotosState {
-  const AddPhotosLoaded();
+  const AddPhotosLoaded({required this.paths});
+
+  final List<String> paths;
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    bool result = o is AddPhotosLoaded && o.paths.length != paths.length;
+    return result;
+  }
 }
 
 class AddPhotosReadyToSend extends AddPhotosState {
