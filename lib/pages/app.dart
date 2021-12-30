@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/about/about_app_page.dart';
-import 'package:photo_tagger/pages/add/add_photos_page.dart';
+import 'package:photo_tagger/pages/add/add_photos_gate.dart';
+import 'package:photo_tagger/pages/add/no_photo_page.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
 import 'package:photo_tagger/pages/authenticate/auth_gate.dart';
 import 'package:photo_tagger/pages/authenticate/sign_out_page.dart';
@@ -36,7 +37,7 @@ class PhotoTaggerApp extends StatelessWidget {
             title: 'Photo tager',
             home: const AuthGate(),
             routes: {
-              MainRoutingMap.AddPhotosPage: (context) => const AddPhotosPage(),
+              MainRoutingMap.AddPhotosPage: (context) => const AddPhotosGate(),
               MainRoutingMap.SearchPhotosPage: (context) =>
                   const SearchPhotosPage(),
               MainRoutingMap.BrowsePhotosPage: (context) =>

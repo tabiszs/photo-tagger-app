@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/auth_service.dart';
@@ -23,6 +24,20 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const SigningInState());
     await Future.delayed(const Duration(seconds: 1));
 
+    final online = await _hasNetwork();
+    if (online) {
+      _signIn(email, password);
+    } else {
+      emit(const SignedOutState(error: 'Internet jest niedostępny.'));
+    }
+  }
+
+  Future<void> signOut() async {
+    await authService.signOut();
+    emit(const SignedOutState());
+  }
+
+  void _signIn(String email, String password) async {
     try {
       final result =
           await authService.signInWithEmailAndPassword(email, password);
@@ -39,9 +54,14 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> signOut() async {
-    await authService.signOut();
-    emit(const SignedOutState());
+  // https://stackoverflow.com/questions/49648022/check-whether-there-is-an-internet-connection-available-on-flutter-app
+  Future<bool> _hasNetwork() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
   }
 
   @override

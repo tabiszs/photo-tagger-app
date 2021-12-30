@@ -2,19 +2,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
+import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
 import 'package:provider/src/provider.dart';
 
 import 'about/about_app_page.dart';
-import 'add/add_photos_page.dart';
+import 'add/no_photo_page.dart';
 import 'authenticate/sign_out_page.dart';
 
 class NavDrawer extends StatelessWidget {
-  const NavDrawer({required this.user, Key? key}) : super(key: key);
+  const NavDrawer({Key? key}) : super(key: key);
   final _padding = const EdgeInsets.symmetric(horizontal: 20);
-  final User user;
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService(firebaseAuth: FirebaseAuth.instance);
+    User user = authService.currentUser!;
     return Drawer(
       child: Material(
         color: Theme.of(context).primaryColor,
@@ -22,7 +24,7 @@ class NavDrawer extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 10),
             _buildHeader(
-              urlImage: getPhotoURL(user),
+              url: user.photoURL,
               name: getName(user),
               email: getEmail(user),
             ),
@@ -67,7 +69,8 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.logout_outlined,
                     text: 'Wyloguj',
-                    onClicked: context.read<AuthService>().signOut,
+                    onClicked: context.read<AuthCubit>().signOut,
+                    // onClicked: context.read<AuthService>().signOut,
                   ),
                 ],
               ),
@@ -79,7 +82,8 @@ class NavDrawer extends StatelessWidget {
   }
 
   String getPhotoURL(User user) {
-    const defaultPhotoURL = 'assets/croix-agse/playstore.png';
+    const defaultPhotoURL =
+        'http://uigse-fse.org/wp-content/uploads/2019/08/croix-agse.png';
     if (user.photoURL == null) {
       return defaultPhotoURL;
     } else {
@@ -104,7 +108,7 @@ class NavDrawer extends StatelessWidget {
   }
 
   Widget _buildHeader({
-    required String urlImage,
+    required String? url,
     required String name,
     required String email,
   }) {
@@ -114,7 +118,7 @@ class NavDrawer extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundImage: NetworkImage(urlImage),
+            backgroundImage: url == null ? null : NetworkImage(url),
           ),
           const SizedBox(width: 20),
           Flexible(

@@ -1,13 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/add_photos_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/pages/add/add_photos_gate.dart';
 
 class AuthorizedRootPage extends StatelessWidget {
-  const AuthorizedRootPage({Key? key, this.user}) : super(key: key);
-  final User? user;
+  const AuthorizedRootPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AddPhotosPage(user: user);
+    return BlocProvider(
+      create: (context) => AddPhotosCubit(),
+      child: const AddPhotosGate(),
+    );
   }
 }

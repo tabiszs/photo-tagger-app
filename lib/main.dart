@@ -28,10 +28,6 @@ class _AppState extends State<_App> {
     return FutureBuilder(
         future: _initialization,
         builder: (context, snapshot) {
-          Future.delayed(const Duration(seconds: 1), () {
-            const InitializePage();
-          });
-
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               return widget.app;

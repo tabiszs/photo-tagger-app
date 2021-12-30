@@ -23,7 +23,6 @@ class AuthService {
       if (isSignedIn) {
         await _firebaseAuth.signOut();
       }
-
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
