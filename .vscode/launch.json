@@ -14,16 +14,6 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
-        },
-        {
-            "name": "photo-tagger (formatting)",
-            "type": "dart",
-            "dart.lineLength": 150,
-            "[dart]": {
-                "editor.rulers": [
-                    150
-                ],
-            }
         }
     ]
 }

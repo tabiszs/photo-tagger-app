@@ -15,9 +15,10 @@ class SignOutPage extends StatefulWidget {
 }
 
 class _SignOutPageState extends State<SignOutPage> {
-  final email = TextEditingController();
-  final password = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   static const double _edgeInsets = 32;
+  bool? correctDomain = true;
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +36,35 @@ class _SignOutPageState extends State<SignOutPage> {
               ),
               const SizedBox(height: 16),
               TextField(
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Adres e-mail: @skauci-europy.pl',
+                  // FSE
+                  // errorText: correctDomain == null
+                  //     ? null
+                  //     : (correctDomain! ? null : "Niepoprawna domena."),
                 ),
-                controller: email,
+                controller: emailController,
+                onSubmitted: (String text) {
+                  setState(() {
+                    text.trimRight();
+                    correctDomain = text.endsWith('@skauci-europy.pl');
+                  });
+                },
               ),
               const SizedBox(height: 16),
               TextField(
+                obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  //TODO - secure password
                   hintText: 'Hasło',
                 ),
-                controller: password,
+                controller: passwordController,
               ),
               const SizedBox(height: 16),
               if (state is SignedOutState && state.error != null) ...[
@@ -57,8 +73,8 @@ class _SignOutPageState extends State<SignOutPage> {
               ] else
                 const SizedBox(height: 32),
               SignInButton(
-                email: email,
-                password: password,
+                email: emailController,
+                password: passwordController,
               )
             ],
           ),
