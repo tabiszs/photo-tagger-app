@@ -3,16 +3,17 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/auth_service.dart';
+import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/authenticate/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authService})
       : super(authService.isSignedIn
-            ? SignedInState(user: authService.currentUser)
+            ? SignedInState(user: authService.currentUser, addPhotosCubit: AddPhotosCubit())
             : const SignedOutState()) {
     _subscription = authService.isSignedInStream.listen((isSignedInEvent) {
       emit(isSignedInEvent
-          ? SignedInState(user: authService.currentUser)
+          ? SignedInState(user: authService.currentUser, addPhotosCubit: AddPhotosCubit())
           : const SignedOutState());
     });
   }
@@ -39,11 +40,13 @@ class AuthCubit extends Cubit<AuthState> {
 
   void _signIn(String email, String password) async {
     try {
-      final result =
-          await authService.signInWithEmailAndPassword(email, password);
+      final result = await authService.signInWithEmailAndPassword(email, password);
       switch (result) {
         case SignInResult.success:
-          emit(SignedInState(user: authService.currentUser));
+          emit(SignedInState(
+            user: authService.currentUser,
+            addPhotosCubit: AddPhotosCubit(),
+          ));
           break;
         case SignInResult.invalidCredentials:
           emit(const SignedOutState(error: 'Nieprawidłowe dane.'));

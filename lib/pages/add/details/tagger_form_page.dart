@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/info/activity.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
+import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
+import 'package:photo_tagger/pages/add/tile/data.dart';
+import 'package:provider/src/provider.dart';
 
 class TaggerFormPage extends StatefulWidget {
-  const TaggerFormPage({Key? key, required this.tagInfo}) : super(key: key);
-  final TagInfo tagInfo;
+  const TaggerFormPage({Key? key, required this.data}) : super(key: key);
+  final PhotoData data;
 
   @override
   _TaggerFormPageState createState() => _TaggerFormPageState();
 }
 
 class _TaggerFormPageState extends State<TaggerFormPage> {
-  final _key = GlobalKey<FormState>();
   late List<DropdownMenuItem<String>> _dropDownMenuActivities;
   late List<DropdownMenuItem<String>> _dropDownMenuPeople;
   late List<DropdownMenuItem<String>> _dropDownMenuBranches;
@@ -46,21 +48,26 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('nazwa zdjęcia z ewentualnymi ...'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: ListView(
-          children: [
-            //TODO - generate form from data;
-            const SizedBox(height: 8),
-            DropDownFormTile(
-              dropDownMenuItems: _dropDownMenuActivities,
-              tagInfo: widget.tagInfo,
-            ),
-          ],
+    return Provider(
+      create: (_) => widget.data,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('nazwa zdjęcia z ewentualnymi ...'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => context.read<AddPhotosCubit>().showGidView(),
+          ),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: ListView(
+            children: [
+              //TODO - generate form from data;
+              const SizedBox(height: 8),
+              DropDownFormTile(dropDownMenuItems: _dropDownMenuActivities),
+            ],
+          ),
         ),
       ),
     );
@@ -70,10 +77,8 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
 class DropDownFormTile extends StatefulWidget {
   const DropDownFormTile({
     Key? key,
-    required this.tagInfo,
     required this.dropDownMenuItems,
   }) : super(key: key);
-  final TagInfo tagInfo;
   final List<DropdownMenuItem<String>>? dropDownMenuItems;
 
   @override
@@ -83,7 +88,8 @@ class DropDownFormTile extends StatefulWidget {
 class _DropDownFormTileState extends State<DropDownFormTile> {
   void _changedDropDownItemActivity(String? selectedActivity) {
     setState(() {
-      widget.tagInfo.activity = selectedActivity;
+      context.read<PhotoData>().tags.activity = selectedActivity;
+      context.read<PhotoData>().state = PhotoState.touched;
     });
   }
 
@@ -100,17 +106,17 @@ class _DropDownFormTileState extends State<DropDownFormTile> {
             children: [
               DropdownButton(
                 items: widget.dropDownMenuItems,
-                value: widget.tagInfo.activity,
+                value: context.select<PhotoData, TagInfo>((data) => data.tags).activity,
                 onChanged: _changedDropDownItemActivity,
               ),
               IconButton(
                 onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => _buildPopupDialog(
-                            context,
-                            widget.dropDownMenuItems,
-                          ));
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) => _buildPopupDialog(
+                  //           context,
+                  //           widget.dropDownMenuItems,
+                  //         ));
                 },
                 icon: const Icon(Icons.add_circle_outline),
               ),
@@ -120,11 +126,4 @@ class _DropDownFormTileState extends State<DropDownFormTile> {
       ),
     );
   }
-}
-
-Widget _buildPopupDialog(
-  BuildContext context,
-  List<DropdownMenuItem<String>>? dropDownMenuItems,
-) {
-  return AddItemDialog(dropDownMenuItems: dropDownMenuItems);
 }

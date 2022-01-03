@@ -1,15 +1,17 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/allowed_photo_extention.dart';
+import 'package:photo_tagger/data/info/tag_info.dart';
 import 'package:photo_tagger/pages/add/add_photos_states.dart';
+import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
+import 'package:photo_tagger/pages/add/tile/data.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit() : super(const AddPhotosEmpty()) {
     emit(const AddPhotosEmpty());
   }
 
-  List<String> _paths = [];
+  List<PhotoData> datas = [];
 
   void addPhoto() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -19,8 +21,8 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     );
 
     if (result != null) {
-      _paths.addAll(_addPaths((result.files)));
-      emit(AddPhotosLoaded(paths: _paths));
+      datas.addAll(_addPhotoDatas(result.files));
+      emit(AddPhotosLoaded(datas: datas));
     }
   }
 
@@ -29,12 +31,34 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     return super.close();
   }
 
-  List<String> _addPaths(List<PlatformFile> files) {
-    List<String> newPaths = [];
+  List<PhotoData> _addPhotoDatas(List<PlatformFile> files) {
+    List<PhotoData> newPhotoDatas = [];
     for (int i = 0; i < files.length; ++i) {
-      newPaths.add(files[i].path!);
+      int currentIndex = datas.length + i;
+      newPhotoDatas.add(
+        PhotoData(
+          index: currentIndex,
+          path: files[i].path!,
+          tags: TagInfo(),
+        ),
+      );
       print(files[i].name);
     }
-    return newPaths;
+    return newPhotoDatas;
+  }
+
+  void showTagPage(int index) {
+    emit(TaggingPageState(data: datas[index]));
+  }
+
+  void showGidView() {
+    emit(AddPhotosLoaded(datas: datas));
+  }
+
+  void showAddTagDialog(int index, List<String>? dropDownListItems) {
+    emit(AddTagState(
+      dropDownListItems: dropDownListItems,
+      data: datas[index],
+    ));
   }
 }

@@ -12,8 +12,10 @@ class PhotoData {
   PhotoState state;
   Key validateKey = GlobalKey<FormState>();
   TagInfo tags;
+  int index;
 
   PhotoData({
+    required this.index,
     required this.path,
     required this.tags,
     this.state = PhotoState.unreplenished,

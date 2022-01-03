@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/info/activity.dart';
+import 'package:photo_tagger/pages/add/tile/data.dart';
+import 'package:provider/src/provider.dart';
 
 class AddItemDialog extends StatefulWidget {
-  const AddItemDialog({Key? key, required this.dropDownMenuItems}) : super(key: key);
-  final List<DropdownMenuItem<String>>? dropDownMenuItems;
+  const AddItemDialog({
+    Key? key,
+    required this.dropDownListItems,
+    required this.data,
+  }) : super(key: key);
+  final List<String>? dropDownListItems;
+  final PhotoData data;
 
   @override
   _AddItemDialogState createState() => _AddItemDialogState();
@@ -37,7 +44,7 @@ class _AddItemDialogState extends State<AddItemDialog> {
               validator: (text) {
                 if (text!.isEmpty) {
                   return 'Nie dodano nowej aktywności';
-                } else if (_isJustInList(text, widget.dropDownMenuItems)) {
+                } else if (_isJustInList(text, widget.dropDownListItems)) {
                   return 'Taka aktywność już istnieje';
                 } else {
                   return null;
@@ -60,7 +67,8 @@ class _AddItemDialogState extends State<AddItemDialog> {
         ElevatedButton(
           onPressed: () {
             if (_key.currentState!.validate()) {
-              activities.add(newItemController.text);
+              //TODO - don't work
+              //context.read<PhotoData>().tags.activity = newItemController.text;
               Navigator.of(context).pop();
             }
           },
@@ -73,9 +81,11 @@ class _AddItemDialogState extends State<AddItemDialog> {
     );
   }
 
-  bool _isJustInList(String? text, List<DropdownMenuItem<String>>? dropDownMenuItems) {
-    for (int i = 0; i < dropDownMenuItems!.length; ++i) {
-      if (dropDownMenuItems[i].value?.toLowerCase() == text?.toLowerCase()) {
+  bool _isJustInList(String? text, List<String>? dropDownMenuItems) {
+    if (dropDownMenuItems == null) return false;
+
+    for (int i = 0; i < dropDownMenuItems.length; ++i) {
+      if (dropDownMenuItems[i].toLowerCase() == text?.toLowerCase()) {
         return true;
       }
     }

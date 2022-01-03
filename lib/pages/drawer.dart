@@ -5,10 +5,6 @@ import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
 import 'package:provider/src/provider.dart';
 
-import 'about/about_app_page.dart';
-import 'add/no_photo_page.dart';
-import 'authenticate/sign_out_page.dart';
-
 class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
   final _padding = const EdgeInsets.symmetric(horizontal: 20);
@@ -36,8 +32,7 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.add_photo_alternate_outlined,
                     text: 'Dodaj zdjęcia',
-                    onClicked: () =>
-                        _selectedItem(context, MainRoutingMap.AddPhotosPage),
+                    onClicked: () => _selectedItem(context, MainRoutingMap.AddPhotosPage),
                   ),
                   _buildMenuItem(
                     icon: Icons.image_search_outlined,
@@ -63,8 +58,7 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.info_outlined,
                     text: 'O aplikacji',
-                    onClicked: () =>
-                        _selectedItem(context, MainRoutingMap.AboutAppPage),
+                    onClicked: () => _selectedItem(context, MainRoutingMap.AboutAppPage),
                   ),
                   _buildMenuItem(
                     icon: Icons.logout_outlined,
@@ -82,8 +76,7 @@ class NavDrawer extends StatelessWidget {
   }
 
   String getPhotoURL(User user) {
-    const defaultPhotoURL =
-        'http://uigse-fse.org/wp-content/uploads/2019/08/croix-agse.png';
+    const defaultPhotoURL = 'http://uigse-fse.org/wp-content/uploads/2019/08/croix-agse.png';
     if (user.photoURL == null) {
       return defaultPhotoURL;
     } else {
