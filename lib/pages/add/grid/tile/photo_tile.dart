@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/data.dart';
-import 'package:photo_tagger/pages/add/grid/loaded_photo.dart';
-import 'package:photo_tagger/pages/add/grid/loading_photo.dart';
+import 'package:photo_tagger/pages/add/grid/tile/loaded_photo.dart';
+import 'package:photo_tagger/pages/add/grid/tile/loading_photo.dart';
 import 'package:provider/provider.dart';
 
 class PhotoTile extends StatefulWidget {
