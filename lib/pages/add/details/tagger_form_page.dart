@@ -3,7 +3,10 @@ import 'package:photo_tagger/data/info/activity.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
-import 'package:photo_tagger/pages/add/tile/data.dart';
+import 'package:photo_tagger/pages/add/data.dart';
+import 'package:photo_tagger/pages/add/details/data_tile.dart';
+import 'package:photo_tagger/pages/add/details/form_tile.dart';
+import 'package:photo_tagger/pages/add/details/submit_button.dart';
 import 'package:provider/src/provider.dart';
 
 class TaggerFormPage extends StatefulWidget {
@@ -48,6 +51,7 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> _key = widget.data.validateKey; //context.read<PhotoData>().validateKey;
     return Provider(
       create: (_) => widget.data,
       child: Scaffold(
@@ -59,70 +63,21 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: ListView(
-            children: [
-              //TODO - generate form from data;
-              const SizedBox(height: 8),
-              DropDownFormTile(dropDownMenuItems: _dropDownMenuActivities),
-            ],
+        body: Form(
+          key: _key,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ListView(
+              children: [
+                //TODO - generate form from data;
+                const SizedBox(height: 8),
+                DropDownFormTile(dropDownMenuItems: _dropDownMenuActivities),
+                DataTimeTile(validationKey: _key),
+                SubmitButton(validationKey: _key),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DropDownFormTile extends StatefulWidget {
-  const DropDownFormTile({
-    Key? key,
-    required this.dropDownMenuItems,
-  }) : super(key: key);
-  final List<DropdownMenuItem<String>>? dropDownMenuItems;
-
-  @override
-  State<DropDownFormTile> createState() => _DropDownFormTileState();
-}
-
-class _DropDownFormTileState extends State<DropDownFormTile> {
-  void _changedDropDownItemActivity(String? selectedActivity) {
-    setState(() {
-      context.read<PhotoData>().tags.activity = selectedActivity;
-      context.read<PhotoData>().state = PhotoState.touched;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Aktywność'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              DropdownButton(
-                items: widget.dropDownMenuItems,
-                value: context.select<PhotoData, TagInfo>((data) => data.tags).activity,
-                onChanged: _changedDropDownItemActivity,
-              ),
-              IconButton(
-                onPressed: () {
-                  // showDialog(
-                  //     context: context,
-                  //     builder: (BuildContext context) => _buildPopupDialog(
-                  //           context,
-                  //           widget.dropDownMenuItems,
-                  //         ));
-                },
-                icon: const Icon(Icons.add_circle_outline),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/pages/add/tile/data.dart';
+import 'package:photo_tagger/pages/add/data.dart';
 import 'package:provider/provider.dart';
 
 class PhotoTile extends StatelessWidget {
@@ -32,19 +32,26 @@ class PhotoTile extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(3.0),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(_radius - 3),
-                    child: Image(
-                      image: FileImage(File(context.read<PhotoData>().path)),
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) {
-                          debugPrint('image loading null');
-                          return child;
-                        }
-                        debugPrint('image loading...');
-                        return const Center(child: CircularProgressIndicator());
-                      },
-                    )),
+                  borderRadius: BorderRadius.circular(_radius - 3),
+                  child: Image(
+                    image: FileImage(File(context.read<PhotoData>().path)),
+                    fit: BoxFit.cover,
+                    frameBuilder: (BuildContext context, Widget child, int? frame,
+                        bool wasSynchronouslyLoaded) {
+                      if (wasSynchronouslyLoaded) {
+                        return child;
+                      }
+                      return AnimatedOpacity(
+                        opacity: frame == null ? 0 : 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeOut,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
             ),
           ),

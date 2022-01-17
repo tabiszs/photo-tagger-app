@@ -10,7 +10,7 @@ enum PhotoState {
 class PhotoData {
   final String path;
   PhotoState state;
-  Key validateKey = GlobalKey<FormState>();
+  GlobalKey<FormState> validateKey = GlobalKey<FormState>();
   TagInfo tags;
   int index;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:photo_tagger/pages/add/tile/data.dart';
+import 'package:photo_tagger/pages/add/data.dart';
 
 abstract class AddPhotosState {
   const AddPhotosState();

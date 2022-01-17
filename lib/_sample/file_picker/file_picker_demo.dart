@@ -36,9 +36,8 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
         type: _pickingType,
         allowMultiple: _multiPick,
         onFileLoading: (FilePickerStatus status) => print(status),
-        allowedExtensions: (_extension?.isNotEmpty ?? false)
-            ? _extension?.replaceAll(' ', '').split(',')
-            : null,
+        allowedExtensions:
+            (_extension?.isNotEmpty ?? false) ? _extension?.replaceAll(' ', '').split(',') : null,
       ))
           ?.files;
     } on PlatformException catch (e) {
@@ -49,8 +48,7 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
     if (!mounted) return;
     setState(() {
       _isLoading = false;
-      _fileName =
-          _paths != null ? _paths!.map((e) => e.name).toString() : '...';
+      _fileName = _paths != null ? _paths!.map((e) => e.name).toString() : '...';
       _userAborted = _paths == null;
     });
   }
@@ -97,9 +95,8 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
     _resetState();
     try {
       String? fileName = await FilePicker.platform.saveFile(
-        allowedExtensions: (_extension?.isNotEmpty ?? false)
-            ? _extension?.replaceAll(' ', '').split(',')
-            : null,
+        allowedExtensions:
+            (_extension?.isNotEmpty ?? false) ? _extension?.replaceAll(' ', '').split(',') : null,
         type: _pickingType,
       );
       setState(() {
@@ -180,7 +177,7 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                             maxLength: 15,
                             autovalidateMode: AutovalidateMode.always,
                             controller: _controller,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'File extension',
                             ),
                             keyboardType: TextInputType.text,
@@ -191,12 +188,11 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                   ConstrainedBox(
                     constraints: const BoxConstraints.tightFor(width: 200.0),
                     child: SwitchListTile.adaptive(
-                      title: Text(
+                      title: const Text(
                         'Pick multiple files',
                         textAlign: TextAlign.right,
                       ),
-                      onChanged: (bool value) =>
-                          setState(() => _multiPick = value),
+                      onChanged: (bool value) => setState(() => _multiPick = value),
                       value: _multiPick,
                     ),
                   ),
@@ -246,29 +242,20 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                                   )
                                 : _paths != null
                                     ? Container(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 30.0),
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.50,
+                                        padding: const EdgeInsets.only(bottom: 30.0),
+                                        height: MediaQuery.of(context).size.height * 0.50,
                                         child: Scrollbar(
                                             child: ListView.separated(
-                                          itemCount: _paths != null &&
-                                                  _paths!.isNotEmpty
+                                          itemCount: _paths != null && _paths!.isNotEmpty
                                               ? _paths!.length
                                               : 1,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
+                                          itemBuilder: (BuildContext context, int index) {
                                             final bool isMultiPath =
-                                                _paths != null &&
-                                                    _paths!.isNotEmpty;
-                                            final String name =
-                                                'File $index: ' +
-                                                    (isMultiPath
-                                                        ? _paths!
-                                                            .map((e) => e.name)
-                                                            .toList()[index]
-                                                        : _fileName ?? '...');
+                                                _paths != null && _paths!.isNotEmpty;
+                                            final String name = 'File $index: ' +
+                                                (isMultiPath
+                                                    ? _paths!.map((e) => e.name).toList()[index]
+                                                    : _fileName ?? '...');
                                             final path = kIsWeb
                                                 ? null
                                                 : _paths!
@@ -283,10 +270,8 @@ class _FilePickerDemoState extends State<FilePickerDemo> {
                                               subtitle: Text(path ?? ''),
                                             );
                                           },
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                      int index) =>
-                                                  const Divider(),
+                                          separatorBuilder: (BuildContext context, int index) =>
+                                              const Divider(),
                                         )),
                                       )
                                     : _saveAsFileName != null

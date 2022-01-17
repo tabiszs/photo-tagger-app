@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/data/info/activity.dart';
-import 'package:photo_tagger/pages/add/tile/data.dart';
-import 'package:provider/src/provider.dart';
+import 'package:photo_tagger/pages/add/data.dart';
 
 class AddItemDialog extends StatefulWidget {
   const AddItemDialog({
@@ -55,26 +53,21 @@ class _AddItemDialogState extends State<AddItemDialog> {
         ),
       ),
       actions: <Widget>[
-        ElevatedButton(
+        MaterialButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
-          ),
           child: const Text('Zamknij'),
         ),
-        ElevatedButton(
+        MaterialButton(
           onPressed: () {
             if (_key.currentState!.validate()) {
               //TODO - don't work
               //context.read<PhotoData>().tags.activity = newItemController.text;
               Navigator.of(context).pop();
+              // context.read<AddPhotosCubit>().showTagPage(widget.data.index);
             }
           },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
-          ),
           child: const Text('Gotowe'),
         ),
       ],

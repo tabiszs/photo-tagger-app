@@ -4,7 +4,7 @@ import 'package:photo_tagger/data/allowed_photo_extention.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
 import 'package:photo_tagger/pages/add/add_photos_states.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
-import 'package:photo_tagger/pages/add/tile/data.dart';
+import 'package:photo_tagger/pages/add/data.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit() : super(const AddPhotosEmpty()) {

@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 
 class InitializePage extends StatelessWidget {
-  const InitializePage({Key? key}) : super(key: key);
+  const InitializePage({required this.splashScreenDuration, Key? key}) : super(key: key);
+  final Duration splashScreenDuration;
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: InitializeWidget(),
+    return MaterialApp(
+      home: InitializeWidget(splashScreenDuration: splashScreenDuration),
     );
   }
 }
 
 class InitializeWidget extends StatelessWidget {
-  const InitializeWidget({Key? key}) : super(key: key);
+  const InitializeWidget({required this.splashScreenDuration, Key? key}) : super(key: key);
+  final Duration splashScreenDuration;
 
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
       color: Colors.white,
       child: Center(
-        child: Image.asset(
-          'assets/croix-agse/playstore.png',
-          width: getImageDimension(context),
+        child: AnimatedOpacity(
+          opacity: 1,
+          duration: splashScreenDuration,
+          child: Image.asset(
+            'assets/croix-agse/playstore.png',
+            width: MediaQuery.of(context).size.shortestSide / 2,
+          ),
         ),
       ),
     );
-  }
-
-  double getImageDimension(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return width < height ? width / 2 : height / 2;
   }
 }

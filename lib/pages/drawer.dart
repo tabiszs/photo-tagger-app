@@ -32,7 +32,7 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.add_photo_alternate_outlined,
                     text: 'Dodaj zdjęcia',
-                    onClicked: () => _selectedItem(context, MainRoutingMap.AddPhotosPage),
+                    onClicked: () => _selectedItem(context, MainRoutingMap.addPhotosPage),
                   ),
                   _buildMenuItem(
                     icon: Icons.image_search_outlined,
@@ -58,13 +58,13 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.info_outlined,
                     text: 'O aplikacji',
-                    onClicked: () => _selectedItem(context, MainRoutingMap.AboutAppPage),
+                    onClicked: () => _selectedItem(context, MainRoutingMap.aboutAppPage),
                   ),
                   _buildMenuItem(
                     icon: Icons.logout_outlined,
                     text: 'Wyloguj',
-                    onClicked: context.read<AuthCubit>().signOut,
-                    // onClicked: context.read<AuthService>().signOut,
+                    //onClicked: context.read<AuthCubit>().signOut,
+                    onClicked: context.read<AuthService>().signOut,
                   ),
                 ],
               ),
@@ -174,15 +174,15 @@ class NavDrawer extends StatelessWidget {
   //TODO zamienić na dziedziczenie
   void _selectedItem(BuildContext context, String path) {
     switch (path) {
-      case MainRoutingMap.AddPhotosPage:
-        Navigator.of(context).pushNamed(MainRoutingMap.AddPhotosPage);
+      case MainRoutingMap.addPhotosPage:
+        Navigator.of(context).pushNamed(MainRoutingMap.addPhotosPage);
         break;
 
-      case MainRoutingMap.AboutAppPage:
-        Navigator.of(context).pushNamed(MainRoutingMap.AboutAppPage);
+      case MainRoutingMap.aboutAppPage:
+        Navigator.of(context).pushNamed(MainRoutingMap.aboutAppPage);
         break;
-      case MainRoutingMap.LoginPage:
-        Navigator.of(context).pushNamed(MainRoutingMap.LoginPage);
+      case MainRoutingMap.loginPage:
+        Navigator.of(context).pushNamed(MainRoutingMap.loginPage);
         break;
     }
   }
