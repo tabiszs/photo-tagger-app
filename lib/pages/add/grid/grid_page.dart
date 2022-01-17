@@ -26,7 +26,7 @@ class _GridPageState extends State<GridPage> {
         ...List.generate(widget.datas.length, (index) {
           return Provider(
             create: (_) => widget.datas[index],
-            child: const PhotoTile(),
+            child: PhotoTile(photoData: widget.datas[index]),
           );
         }),
       ],
