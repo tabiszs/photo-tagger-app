@@ -12,11 +12,14 @@ import 'package:photo_tagger/pages/add/grid/action_panel.dart';
 import 'package:photo_tagger/pages/add/grid/add_photos_scaffold.dart';
 import 'package:photo_tagger/pages/add/grid/grid_page.dart';
 import 'package:photo_tagger/pages/add/grid/no_photo_page.dart';
+import 'package:photo_tagger/pages/add/grid/send_bar.dart';
 import 'package:photo_tagger/pages/authenticate/auth_state.dart';
+import 'package:photo_tagger/pages/bar.dart';
 import 'package:provider/provider.dart';
 
 class AddPhotosGate extends StatelessWidget {
   const AddPhotosGate({Key? key}) : super(key: key);
+  static String title = 'Dodawanie zdjęć';
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +27,16 @@ class AddPhotosGate extends StatelessWidget {
       create: (_) => context.read<SignedInState>().addPhotosCubit,
       child: BlocBuilder<AddPhotosCubit, AddPhotosState>(builder: (context, state) {
         if (state is AddPhotosEmpty) {
-          return const AddPhotosScaffold(
-            bodyWidget: NoPhotoPage(),
-            actionPanel: AddPhotoButton(),
+          return AddPhotosScaffold(
+            bodyWidget: const NoPhotoPage(),
+            actionPanel: const AddPhotoButton(),
+            bar: MainBar(title: title),
           );
         } else if (state is AddPhotosLoaded) {
           return AddPhotosScaffold(
             bodyWidget: GridPage(datas: state.datas),
             actionPanel: const AddPhotoButton(),
+            bar: SendBar(title: title),
           );
         } else if (state is AddPhotosReadyToSend) {
           return const ReadyToSendPage();

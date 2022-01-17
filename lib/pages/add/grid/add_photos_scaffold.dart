@@ -7,15 +7,17 @@ class AddPhotosScaffold extends StatelessWidget {
     Key? key,
     required this.bodyWidget,
     required this.actionPanel,
+    required this.bar,
   }) : super(key: key);
   final Widget bodyWidget;
   final Widget actionPanel;
+  final PreferredSizeWidget bar;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavDrawer(),
-      appBar: const MainBar(title: 'Dodawanie zdjęć'),
+      appBar: bar,
       body: bodyWidget,
       floatingActionButton: actionPanel,
     );

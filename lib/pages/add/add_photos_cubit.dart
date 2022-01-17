@@ -13,6 +13,15 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
 
   List<PhotoData> datas = [];
 
+  bool isAllCompleted() {
+    for (int i = 0; i < datas.length; ++i) {
+      if (datas[i].state != PhotoState.completed) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   void addPhoto() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -61,4 +70,6 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
       data: datas[index],
     ));
   }
+
+  void sendData() {}
 }
