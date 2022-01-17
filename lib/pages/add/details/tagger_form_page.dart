@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/info/activity.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
 import 'package:photo_tagger/pages/add/data.dart';
 import 'package:photo_tagger/pages/add/details/data_tile.dart';
 import 'package:photo_tagger/pages/add/details/form_tile.dart';
@@ -51,15 +50,15 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> _key = widget.data.validateKey; //context.read<PhotoData>().validateKey;
+    GlobalKey<FormState> _key = widget.data.validateKey;
     return Provider(
       create: (_) => widget.data,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('nazwa zdjęcia z ewentualnymi ...'),
+          title: Text('Zdjęcie ' + widget.data.index.toString()),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () => context.read<AddPhotosCubit>().showGidView(),
+            onPressed: () => context.read<AddPhotosCubit>().showGridView(),
           ),
           centerTitle: true,
         ),

@@ -24,7 +24,7 @@ class _App extends StatefulWidget {
 
 class _AppState extends State<_App> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  static const Duration splashScreenDuration = Duration(seconds: 2);
+  static const Duration splashScreenDuration = Duration(seconds: 1);
 
   @override
   Widget build(BuildContext context) {

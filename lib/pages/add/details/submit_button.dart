@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/data.dart';
 import 'package:provider/src/provider.dart';
 
@@ -20,6 +21,7 @@ class SubmitButton extends StatelessWidget {
             if (validationKey.currentState!.validate()) {
               context.read<PhotoData>().state = PhotoState.completed;
               validationKey.currentState!.save();
+              context.read<AddPhotosCubit>().showGridView();
             }
           },
           child: const Text("Zatwierdź"),

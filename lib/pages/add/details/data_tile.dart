@@ -17,6 +17,7 @@ class DataTimeTile extends StatefulWidget {
 
 class _DataTimeTileState extends State<DataTimeTile> {
   DateTime? selectedDate;
+  String _errorText = '';
 
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -29,6 +30,7 @@ class _DataTimeTileState extends State<DataTimeTile> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
+        context.read<PhotoData>().state = PhotoState.touched;
       });
     }
   }
@@ -48,7 +50,6 @@ class _DataTimeTileState extends State<DataTimeTile> {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('Wybierz datę utworzenia'),
         FormField(
-          key: GlobalKey<FormState>(),
           builder: (formState) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,11 +67,9 @@ class _DataTimeTileState extends State<DataTimeTile> {
               ],
             );
           },
-          validator: (creationDate) {
+          validator: (_) {
             if (creationDate == null) {
               return 'Dodaj datę utworzenia';
-            } else {
-              return null;
             }
           },
         ),
