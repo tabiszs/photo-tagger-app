@@ -79,3 +79,12 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth'
 }
+
+dependencies {
+  implementation 'com.android.support:multidex:1.0.3' //enter the latest version
+}
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+}
