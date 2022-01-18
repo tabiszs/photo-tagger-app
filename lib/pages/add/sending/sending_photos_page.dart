@@ -7,12 +7,18 @@ class SendingPhotosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).canvasColor,
-      child: const Center(
-        child: CircularProgressIndicator(),
-        // Text(
-        //       'Wysyłam zdjęcia z tagami.',
-        //       style: Theme.of(context).textTheme.headline3,
-        //     ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Wysyłam zdjęcia z tagami.',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            const SizedBox(height: 15),
+            const CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }

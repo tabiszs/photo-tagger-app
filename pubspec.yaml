@@ -55,6 +55,7 @@ dependencies:
   cloud_firestore: ^3.1.6
   firebase_storage: ^10.2.5
   firebase_auth_oauth_web: ^1.0.2
+  rive: ^0.8.1
 
 dev_dependencies:
   flutter_test:
@@ -116,3 +117,4 @@ flutter:
   assets:
     - assets/images/
     - assets/croix-agse/
+    - assets/rive/

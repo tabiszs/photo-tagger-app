@@ -8,6 +8,7 @@ import 'package:photo_tagger/pages/add/add_photos_states.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
 import 'package:photo_tagger/data/data.dart';
 import 'package:photo_tagger/pages/add/details/data_tile.dart';
+import 'package:photo_tagger/pages/add/failure/failure_page.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit({
@@ -83,19 +84,29 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     DateTime start = DateTime.now();
     Duration minDuration = const Duration(seconds: 2);
 
+    try {
+      await sendPhotosAndTags();
+      // TODO - test for exeption
+      //throw Exception("xxxxxxxxx");
+
+      DateTime stop = DateTime.now();
+      if (stop.isBefore(start.add(minDuration))) {
+        await Future.delayed(
+          Duration(microseconds: stop.millisecondsSinceEpoch - start.millisecondsSinceEpoch),
+        );
+      }
+      emit(const AddPhotosSucces());
+    } catch (e) {
+      emit(const AddPhotosFailure());
+    }
+  }
+
+  Future<void> sendPhotosAndTags() async {
     for (int i = 0; i < datas.length; ++i) {
       await uploadPhoto(i);
       await uploadTags(i);
       // update addPhotosSendingPage
     }
-
-    DateTime stop = DateTime.now();
-    if (stop.isBefore(start.add(minDuration))) {
-      await Future.delayed(
-        Duration(microseconds: stop.millisecondsSinceEpoch - start.millisecondsSinceEpoch),
-      );
-    }
-    //emit(const AddPhotosSucces());
   }
 
   Future<void> uploadPhoto(int i) async {
@@ -104,5 +115,14 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
 
   Future<void> uploadTags(int i) async {
     firestore.uploadTags(datas[i]);
+  }
+
+  void returnAddPhotosLoaded() {
+    emit(AddPhotosLoaded(datas: datas));
+  }
+
+  void returntoNoPhotoPage() {
+    datas.clear();
+    emit(const AddPhotosEmpty());
   }
 }

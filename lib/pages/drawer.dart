@@ -63,8 +63,8 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.logout_outlined,
                     text: 'Wyloguj',
-                    //onClicked: context.read<AuthCubit>().signOut,
-                    onClicked: context.read<AuthService>().signOut,
+                    onClicked: context.read<AuthCubit>().signOut,
+                    //onClicked: context.read<AuthService>().signOut,
                   ),
                 ],
               ),

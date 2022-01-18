@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:provider/src/provider.dart';
+import 'package:rive/rive.dart';
 
-class FailureResultPage extends StatelessWidget {
-  const FailureResultPage({Key? key}) : super(key: key);
+class SuccessResultPage extends StatelessWidget {
+  const SuccessResultPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +14,12 @@ class FailureResultPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Nie udało się przesłać zdjęć. Spróbuj ponownie.',
-              style: Theme.of(context).textTheme.headline5,
-              textAlign: TextAlign.center,
-            ),
+            const SizedBox.square(
+                dimension: 120,
+                child: RiveAnimation.asset('assets/rive/1029-2009-success-check.riv')),
             const SizedBox(height: 15),
             ElevatedButton(
-              onPressed: () => returnToGridView(context),
+              onPressed: () => returnToNoPhotoPage(context),
               child: const Text('Wróć'),
             )
           ],
@@ -29,8 +28,8 @@ class FailureResultPage extends StatelessWidget {
     );
   }
 
-  void returnToGridView(BuildContext context) {
+  void returnToNoPhotoPage(BuildContext context) {
     AddPhotosCubit cubit = context.read<AddPhotosCubit>();
-    cubit.returnAddPhotosLoaded();
+    cubit.returntoNoPhotoPage();
   }
 }
