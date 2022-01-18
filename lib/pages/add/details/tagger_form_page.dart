@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/info/activity.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/pages/add/data.dart';
+import 'package:photo_tagger/data/data.dart';
 import 'package:photo_tagger/pages/add/details/data_tile.dart';
 import 'package:photo_tagger/pages/add/details/form_tile.dart';
 import 'package:photo_tagger/pages/add/details/submit_button.dart';

@@ -1,16 +1,23 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/allowed_photo_extention.dart';
+import 'package:photo_tagger/data/firestore_service.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
+import 'package:photo_tagger/data/storage_service.dart';
 import 'package:photo_tagger/pages/add/add_photos_states.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
-import 'package:photo_tagger/pages/add/data.dart';
+import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/pages/add/details/data_tile.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
-  AddPhotosCubit() : super(const AddPhotosEmpty()) {
+  AddPhotosCubit({
+    required this.storage,
+    required this.firestore,
+  }) : super(const AddPhotosEmpty()) {
     emit(const AddPhotosEmpty());
   }
-
+  final StorageService storage;
+  final FirestoreService firestore;
   List<PhotoData> datas = [];
 
   bool isAllCompleted() {
@@ -71,5 +78,31 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     ));
   }
 
-  void sendData() {}
+  void sendData() async {
+    emit(const AddPhotosSending());
+    DateTime start = DateTime.now();
+    Duration minDuration = const Duration(seconds: 2);
+
+    for (int i = 0; i < datas.length; ++i) {
+      await uploadPhoto(i);
+      await uploadTags(i);
+      // update addPhotosSendingPage
+    }
+
+    DateTime stop = DateTime.now();
+    if (stop.isBefore(start.add(minDuration))) {
+      await Future.delayed(
+        Duration(microseconds: stop.millisecondsSinceEpoch - start.millisecondsSinceEpoch),
+      );
+    }
+    //emit(const AddPhotosSucces());
+  }
+
+  Future<void> uploadPhoto(int i) async {
+    await storage.uploadFile(datas[i]);
+  }
+
+  Future<void> uploadTags(int i) async {
+    firestore.uploadTags(datas[i]);
+  }
 }

@@ -3,22 +3,41 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/auth_service.dart';
+import 'package:photo_tagger/data/firestore_service.dart';
+import 'package:photo_tagger/data/storage_service.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/authenticate/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit({required this.authService})
-      : super(authService.isSignedIn
-            ? SignedInState(user: authService.currentUser, addPhotosCubit: AddPhotosCubit())
+  AuthCubit({
+    required this.authService,
+    required this.storageService,
+    required this.firestoreService,
+  }) : super(authService.isSignedIn
+            ? SignedInState(
+                user: authService.currentUser,
+                addPhotosCubit: AddPhotosCubit(
+                  storage: storageService,
+                  firestore: firestoreService,
+                ),
+              )
             : const SignedOutState()) {
     _subscription = authService.isSignedInStream.listen((isSignedInEvent) {
       emit(isSignedInEvent
-          ? SignedInState(user: authService.currentUser, addPhotosCubit: AddPhotosCubit())
+          ? SignedInState(
+              user: authService.currentUser,
+              addPhotosCubit: AddPhotosCubit(
+                storage: storageService,
+                firestore: firestoreService,
+              ),
+            )
           : const SignedOutState());
     });
   }
 
+  final StorageService storageService;
   final AuthService authService;
+  final FirestoreService firestoreService;
   StreamSubscription? _subscription;
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
@@ -45,7 +64,10 @@ class AuthCubit extends Cubit<AuthState> {
         case SignInResult.success:
           emit(SignedInState(
             user: authService.currentUser,
-            addPhotosCubit: AddPhotosCubit(),
+            addPhotosCubit: AddPhotosCubit(
+              storage: storageService,
+              firestore: firestoreService,
+            ),
           ));
           break;
         case SignInResult.invalidCredentials:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/info/activity.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
-import 'package:photo_tagger/pages/add/data.dart';
+import 'package:photo_tagger/data/data.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
 import 'package:provider/src/provider.dart';
 

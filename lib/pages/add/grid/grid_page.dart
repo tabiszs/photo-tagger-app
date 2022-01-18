@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/data.dart';
+import 'package:photo_tagger/data/data.dart';
 import 'package:photo_tagger/pages/add/grid/tile/photo_tile.dart';
 import 'package:provider/provider.dart';
 

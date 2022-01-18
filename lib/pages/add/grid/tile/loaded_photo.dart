@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/pages/add/data.dart';
+import 'package:photo_tagger/data/data.dart';
 import 'package:provider/src/provider.dart';
 
 class LoadedPhoto extends StatelessWidget {

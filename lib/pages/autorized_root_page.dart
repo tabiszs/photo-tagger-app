@@ -2,7 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
-import 'package:photo_tagger/data/store_service.dart';
+import 'package:photo_tagger/data/storage_service.dart';
 
 import 'settings/settings_page.dart';
 
@@ -31,7 +31,6 @@ class AuthorizedRootPage extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<SignedInState>(create: (_) => signedInState),
-        Provider<StoreService>(create: (_) => StoreService(storage: FirebaseStorage.instance)),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -41,7 +40,7 @@ class AuthorizedRootPage extends StatelessWidget {
               bodyText1: TextStyle(color: Colors.white),
               bodyText2: TextStyle(color: Colors.black),
             )),
-        title: 'Photo tager',
+        title: 'Tager Zdjęć',
         initialRoute: MainRoutingMap.addPhotosPage,
         routes: {
           MainRoutingMap.addPhotosPage: (context) => const AddPhotosGate(),

@@ -6,6 +6,6 @@ class LoadingPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpinKitCubeGrid(color: Theme.of(context).backgroundColor);
+    return SpinKitCubeGrid(color: Theme.of(context).primaryColor);
   }
 }

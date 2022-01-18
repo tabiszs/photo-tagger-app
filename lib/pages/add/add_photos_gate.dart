@@ -6,7 +6,7 @@ import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
 import 'package:photo_tagger/pages/add/details/tagger_form_page.dart';
 import 'package:photo_tagger/pages/add/failure/failure_page.dart';
 import 'package:photo_tagger/pages/add/failure/ready_to_send_page.dart';
-import 'package:photo_tagger/pages/add/failure/sending_photos_page.dart';
+import 'package:photo_tagger/pages/add/sending/sending_photos_page.dart';
 import 'package:photo_tagger/pages/add/failure/success_page.dart';
 import 'package:photo_tagger/pages/add/grid/action_panel.dart';
 import 'package:photo_tagger/pages/add/grid/add_photos_scaffold.dart';
