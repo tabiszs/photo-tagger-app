@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FolderViewPage extends StatelessWidget {
-  const FolderViewPage({Key? key}) : super(key: key);
+class DetailsBrowsePage extends StatelessWidget {
+  const DetailsBrowsePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

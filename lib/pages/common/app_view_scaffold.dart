@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/bar.dart';
-import 'package:photo_tagger/pages/drawer.dart';
+import 'package:photo_tagger/pages/common/drawer.dart';
 
-class AddPhotosScaffold extends StatelessWidget {
-  const AddPhotosScaffold({
+class AppViewScaffold extends StatelessWidget {
+  const AppViewScaffold({
     Key? key,
     required this.bodyWidget,
-    required this.actionPanel,
+    this.actionPanel,
     required this.bar,
   }) : super(key: key);
   final Widget bodyWidget;
-  final Widget actionPanel;
+  final Widget? actionPanel;
   final PreferredSizeWidget bar;
 
   @override

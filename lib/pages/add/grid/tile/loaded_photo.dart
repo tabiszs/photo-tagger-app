@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/photo_utils.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/data/data.dart';
 import 'package:provider/src/provider.dart';
@@ -7,8 +8,8 @@ class LoadedPhoto extends StatelessWidget {
   const LoadedPhoto({required this.image, Key? key}) : super(key: key);
 
   final FileImage image;
-  final double _size = 150;
-  final double _radius = 9;
+  static final double _size = PhotoUtils.size;
+  static final double _radius = PhotoUtils.radius;
 
   @override
   Widget build(BuildContext context) {

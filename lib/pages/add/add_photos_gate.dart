@@ -9,12 +9,12 @@ import 'package:photo_tagger/pages/add/ready_to_send_page.dart';
 import 'package:photo_tagger/pages/add/sending/sending_photos_page.dart';
 import 'package:photo_tagger/pages/add/success/success_page.dart';
 import 'package:photo_tagger/pages/add/grid/action_panel.dart';
-import 'package:photo_tagger/pages/add/grid/add_photos_scaffold.dart';
+import 'package:photo_tagger/pages/common/app_view_scaffold.dart';
 import 'package:photo_tagger/pages/add/grid/grid_page.dart';
 import 'package:photo_tagger/pages/add/grid/no_photo_page.dart';
 import 'package:photo_tagger/pages/add/grid/send_bar.dart';
 import 'package:photo_tagger/pages/authenticate/auth_state.dart';
-import 'package:photo_tagger/pages/bar.dart';
+import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:provider/provider.dart';
 
 class AddPhotosGate extends StatelessWidget {
@@ -27,13 +27,13 @@ class AddPhotosGate extends StatelessWidget {
       create: (_) => context.read<SignedInState>().addPhotosCubit,
       child: BlocBuilder<AddPhotosCubit, AddPhotosState>(builder: (context, state) {
         if (state is AddPhotosEmpty) {
-          return AddPhotosScaffold(
+          return AppViewScaffold(
             bodyWidget: const NoPhotoPage(),
             actionPanel: const AddPhotoButton(),
             bar: MainBar(title: title),
           );
         } else if (state is AddPhotosLoaded) {
-          return AddPhotosScaffold(
+          return AppViewScaffold(
             bodyWidget: GridPage(datas: state.datas),
             actionPanel: const AddPhotoButton(),
             bar: SendBar(title: title),

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,9 +34,6 @@ class AuthService {
       //await performLogin('microsoft.com', ['email'], {"locale": "pl"});
       return SignInResult.success;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'wrong-password') {
-        return SignInResult.success;
-      }
       return SignInResult.invalidCredentials;
     } catch (e) {
       rethrow;

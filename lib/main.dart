@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/app.dart';
-import 'package:photo_tagger/pages/initialize_page.dart';
+import 'package:photo_tagger/pages/initialze/initialize_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

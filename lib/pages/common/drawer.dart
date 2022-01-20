@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
+import 'package:photo_tagger/pages/directory/folder_view_gate.dart';
 import 'package:provider/src/provider.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -47,9 +48,9 @@ class NavDrawer extends StatelessWidget {
                     text: 'Edytuj zdjęcie',
                   ),
                   _buildMenuItem(
-                    icon: Icons.folder_open_outlined,
-                    text: 'Widok folderów',
-                  ),
+                      icon: Icons.folder_open_outlined,
+                      text: 'Widok folderów',
+                      onClicked: () => _selectedItem(context, MainRoutingMap.folderViewPage)),
                   _buildDivier(),
                   _buildMenuItem(
                     icon: Icons.settings,
@@ -176,6 +177,9 @@ class NavDrawer extends StatelessWidget {
     switch (path) {
       case MainRoutingMap.addPhotosPage:
         Navigator.of(context).pushNamed(MainRoutingMap.addPhotosPage);
+        break;
+      case MainRoutingMap.folderViewPage:
+        Navigator.of(context).pushNamed(MainRoutingMap.folderViewPage);
         break;
 
       case MainRoutingMap.aboutAppPage:

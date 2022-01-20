@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/pages/bar.dart';
+import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:provider/src/provider.dart';
 
 class SendBar extends MainBar {

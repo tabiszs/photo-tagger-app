@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/firestore_service.dart';
 import 'package:photo_tagger/data/storage_service.dart';
@@ -39,6 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthService authService;
   final FirestoreService firestoreService;
   StreamSubscription? _subscription;
+  List<String> cachedUrls = [];
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     emit(const SigningInState());
@@ -53,8 +55,19 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> signOut() async {
+    await clearImageCache();
     await authService.signOut();
     emit(const SignedOutState());
+  }
+
+  Future<void> clearImageCache() async {
+    for (int i = 0; i < cachedUrls.length; ++i) {
+      await DefaultCacheManager().removeFile(cachedUrls[i]);
+    }
+  }
+
+  void addCachedImage(String url) {
+    cachedUrls.add(url);
   }
 
   void _signIn(String email, String password) async {

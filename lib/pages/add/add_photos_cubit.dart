@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/data/allowed_photo_extention.dart';
@@ -19,6 +20,7 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
   }
   final StorageService storage;
   final FirestoreService firestore;
+  late final StreamSubscription _sub;
   List<PhotoData> datas = [];
 
   bool isAllCompleted() {
@@ -43,10 +45,18 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     }
   }
 
-  @override
-  Future<void> close() async {
-    return super.close();
-  }
+  // Future<void> refresh() async {
+  //   final messages = await _shoutboxDataSource.getMessages();
+  //   emit(ShoutboxLoadedState(
+  //     messages: messages.reversed.toList(),
+  //   ));
+
+  //   @override
+  //   Future<void> close() async {
+  //     await _sub.cancel();
+  //     return super.close();
+  //   }
+  // }
 
   List<PhotoData> _addPhotoDatas(List<PlatformFile> files) {
     List<PhotoData> newPhotoDatas = [];
