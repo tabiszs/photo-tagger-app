@@ -22,7 +22,9 @@ class FolderViewCubit extends Cubit<BrowseState> {
     List<Reference> files = _refList.items;
     urls = [];
     for (int i = 0; i < files.length; ++i) {
-      urls.add(await files[i].getDownloadURL());
+      String url = await files[i].getDownloadURL();
+      authCubit.addCachedImage(url);
+      urls.add(url);
     }
     return urls;
   }

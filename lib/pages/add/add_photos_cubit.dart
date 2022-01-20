@@ -6,10 +6,7 @@ import 'package:photo_tagger/data/firestore_service.dart';
 import 'package:photo_tagger/data/info/tag_info.dart';
 import 'package:photo_tagger/data/storage_service.dart';
 import 'package:photo_tagger/pages/add/add_photos_states.dart';
-import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
 import 'package:photo_tagger/data/data.dart';
-import 'package:photo_tagger/pages/add/details/data_tile.dart';
-import 'package:photo_tagger/pages/add/failure/failure_page.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit({
@@ -69,7 +66,6 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
           tags: TagInfo(),
         ),
       );
-      print(files[i].name);
     }
     return newPhotoDatas;
   }

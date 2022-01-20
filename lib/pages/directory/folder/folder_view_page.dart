@@ -42,6 +42,10 @@ class _FolderViewPageState extends State<FolderViewPage> {
     context.read<DirectoryBrowseState>().pwd = fullNameFolder;
     setState(() => loaded = false);
     getFoldersAndFiles();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const FolderViewPage()),
+    );
   }
 
   void goToImageView(int index) {

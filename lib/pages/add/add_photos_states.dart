@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:photo_tagger/data/data.dart';
 
 abstract class AddPhotosState {
