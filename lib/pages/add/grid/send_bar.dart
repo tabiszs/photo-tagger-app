@@ -5,7 +5,7 @@ import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:provider/src/provider.dart';
 
 class SendBar extends MainBar {
-  SendBar({Key? key, required String title}) : super(key: key, title: title);
+  const SendBar({Key? key, required String title}) : super(key: key, title: title);
 
   @override
   Widget build(BuildContext context) {

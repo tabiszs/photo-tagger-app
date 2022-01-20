@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:photo_tagger/data/data.dart';
-import 'package:photo_tagger/data/info/tag_info.dart';
 
 class FirestoreService {
   FirestoreService({required firestore}) : _firestore = firestore {

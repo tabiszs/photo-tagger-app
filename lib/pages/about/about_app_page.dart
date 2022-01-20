@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/photo_utils.dart';
 
 class AboutAppPage extends StatelessWidget {
   const AboutAppPage({Key? key}) : super(key: key);
@@ -13,14 +14,14 @@ class AboutAppPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: maxPadding,
-          vertical: 10,
-        ),
         alignment: Alignment.center,
         child: ListView(
           children: [
-            Image.asset('assets/images/icon-tagger.jpg'),
+            const SizedBox(height: 30),
+            SizedBox.square(
+              dimension: PhotoUtils.size,
+              child: Image.asset('assets/images/badges.png'),
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [

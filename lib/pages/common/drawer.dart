@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
-import 'package:photo_tagger/pages/directory/folder_view_gate.dart';
 import 'package:provider/src/provider.dart';
 
 class NavDrawer extends StatelessWidget {

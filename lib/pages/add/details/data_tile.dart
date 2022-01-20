@@ -17,7 +17,7 @@ class DataTimeTile extends StatefulWidget {
 
 class _DataTimeTileState extends State<DataTimeTile> {
   DateTime? selectedDate;
-  String _errorText = '';
+  final String _errorText = '';
 
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
