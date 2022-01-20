@@ -11,6 +11,7 @@ class FolderViewCubit extends Cubit<BrowseState> {
   final AuthCubit authCubit;
   final StorageService storage;
   late ListResult _refList;
+  late List<String> urls;
 
   Future<ListResult> getFoldersAndFilesFrom(String fullPathFolder) async {
     _refList = await storage.listAllFolder(fullPathFolder);
@@ -19,7 +20,7 @@ class FolderViewCubit extends Cubit<BrowseState> {
 
   Future<List<String>> getUrlFiles() async {
     List<Reference> files = _refList.items;
-    List<String> urls = [];
+    urls = [];
     for (int i = 0; i < files.length; ++i) {
       urls.add(await files[i].getDownloadURL());
     }

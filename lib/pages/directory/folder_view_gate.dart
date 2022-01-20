@@ -32,7 +32,10 @@ class FolderViewGate extends StatelessWidget {
               bar: const MainBar(title: 'Wszystkie zdjęcia'),
             );
           } else if (state is PhotoBrowseState) {
-            return const PhotoViewPage();
+            return Provider(
+              create: (_) => state,
+              child: const PhotoViewPage(),
+            );
           } else if (state is DetailsBrowseState) {
             return const DetailsBrowsePage();
           } else {
