@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.pw.photo_tagger">
    <application
-        android:label="TaggerSE"
+        android:label="Biblioteka Zdjęć"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
