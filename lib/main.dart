@@ -41,7 +41,15 @@ class _AppState extends State<_App> {
   }
 
   Future<FirebaseApp> initializeFirebaseApp() async {
-    await Future.delayed(splashScreenDuration);
-    return _initialization;
+    DateTime start = DateTime.now();
+    FirebaseApp initialization = await _initialization;
+
+    DateTime stop = DateTime.now();
+    if (stop.isBefore(start.add(splashScreenDuration))) {
+      await Future.delayed(
+        Duration(microseconds: stop.millisecondsSinceEpoch - start.millisecondsSinceEpoch),
+      );
+    }
+    return initialization;
   }
 }
