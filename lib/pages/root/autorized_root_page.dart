@@ -33,7 +33,7 @@ class AuthorizedRootPage extends StatelessWidget {
               bodyText1: TextStyle(color: Colors.white),
               bodyText2: TextStyle(color: Colors.black),
             )),
-        title: 'Tager Zdjęć',
+        title: 'Biblioteka Zdjęć',
         initialRoute: MainRoutingMap.addPhotosPage,
         routes: {
           MainRoutingMap.addPhotosPage: (context) => const AddPhotosGate(),

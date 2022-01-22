@@ -38,23 +38,26 @@ class NavDrawer extends StatelessWidget {
                     icon: Icons.image_search_outlined,
                     text: 'Wyszukaj zdjęcia',
                   ),
-                  _buildMenuItem(
-                    icon: Icons.photo_library_outlined,
-                    text: 'Przeglądaj zdjęcia',
-                  ),
-                  _buildMenuItem(
-                    icon: Icons.mode_edit_outlined,
-                    text: 'Edytuj zdjęcie',
-                  ),
+                  // TODO - przeglądaj zdjęcia
+                  // _buildMenuItem(
+                  //   icon: Icons.photo_library_outlined,
+                  //   text: 'Przeglądaj zdjęcia',
+                  // ),
+                  // TODO - edytuj zdjęcie
+                  // _buildMenuItem(
+                  //   icon: Icons.mode_edit_outlined,
+                  //   text: 'Edytuj zdjęcie',
+                  // ),
                   _buildMenuItem(
                       icon: Icons.folder_open_outlined,
                       text: 'Widok folderów',
                       onClicked: () => _selectedItem(context, MainRoutingMap.folderViewPage)),
                   _buildDivier(),
-                  _buildMenuItem(
-                    icon: Icons.settings,
-                    text: 'Ustawienia',
-                  ),
+                  // TODO - ustawienia
+                  // _buildMenuItem(
+                  //   icon: Icons.settings,
+                  //   text: 'Ustawienia',
+                  // ),
                   _buildMenuItem(
                     icon: Icons.info_outlined,
                     text: 'O aplikacji',
@@ -109,23 +112,25 @@ class NavDrawer extends StatelessWidget {
       padding: _padding.add(const EdgeInsets.symmetric(vertical: 20)),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundImage: url == null ? null : NetworkImage(url),
-          ),
-          const SizedBox(width: 20),
+          //TODO - on Microsoft Account
+          // CircleAvatar(
+          //   radius: 30,
+          //   backgroundImage: url == null ? null : NetworkImage(url),
+          // ),
+          // const SizedBox(width: 20),
           Flexible(
             flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  overflow: TextOverflow.fade,
-                  softWrap: false,
-                  maxLines: 1,
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
-                ),
+                //TODO - on Microsoft Account
+                // Text(
+                //   name,
+                //   overflow: TextOverflow.fade,
+                //   softWrap: false,
+                //   maxLines: 1,
+                //   style: const TextStyle(fontSize: 20, color: Colors.white),
+                // ),
                 const SizedBox(height: 4),
                 Text(
                   email,
