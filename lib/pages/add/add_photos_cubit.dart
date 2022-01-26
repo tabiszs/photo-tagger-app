@@ -96,9 +96,10 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
       //throw Exception("xxxxxxxxx");
 
       DateTime stop = DateTime.now();
-      if (stop.isBefore(start.add(minDuration))) {
+      DateTime minStop = start.add(minDuration);
+      if (stop.isBefore(minStop)) {
         await Future.delayed(
-          Duration(microseconds: stop.millisecondsSinceEpoch - start.millisecondsSinceEpoch),
+          Duration(microseconds: minStop.millisecondsSinceEpoch - stop.millisecondsSinceEpoch),
         );
       }
       emit(const AddPhotosSucces());
