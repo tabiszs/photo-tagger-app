@@ -25,9 +25,9 @@ class FolderViewGate extends StatelessWidget {
         builder: (context, state) {
           if (state is DirectoryBrowseState) {
             return AppViewScaffold(
-              bodyWidget: FolderViewPage(
-                state: state,
-                cubit: context.read<FolderViewCubit>(),
+              bodyWidget: Provider(
+                create: (_) => state,
+                child: const FolderViewPage(),
               ),
               bar: const MainBar(title: 'Wszystkie zdjęcia'),
             );

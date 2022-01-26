@@ -4,22 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:photo_tagger/common/loading_photo.dart';
 import 'package:photo_tagger/data/photo_utils.dart';
-import 'package:photo_tagger/pages/common/app_view_scaffold.dart';
-import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:photo_tagger/pages/directory/browse_states.dart';
-import 'package:photo_tagger/pages/directory/details/details_browse_page.dart';
 import 'package:photo_tagger/pages/directory/folder_view_cubit.dart';
-import 'package:photo_tagger/pages/directory/photo/photo_view_page.dart';
 import 'package:provider/src/provider.dart';
 
 class FolderViewPage extends StatefulWidget {
-  const FolderViewPage({
-    required this.state,
-    required this.cubit,
-    Key? key,
-  }) : super(key: key);
-  final DirectoryBrowseState state;
-  final FolderViewCubit cubit;
+  const FolderViewPage({Key? key}) : super(key: key);
 
   @override
   _FolderViewPageState createState() => _FolderViewPageState();
@@ -39,8 +29,8 @@ class _FolderViewPageState extends State<FolderViewPage> {
   }
 
   void getFoldersAndFiles() async {
-    String pwd = widget.state.pwd;
-    FolderViewCubit cubit = widget.cubit;
+    String pwd = context.read<DirectoryBrowseState>().pwd;
+    FolderViewCubit cubit = context.read<FolderViewCubit>();
     _refList = await cubit.getFoldersAndFilesFrom(pwd);
     _urls = await cubit.getUrlFiles();
     setState(() {
@@ -49,42 +39,23 @@ class _FolderViewPageState extends State<FolderViewPage> {
   }
 
   void goToFolder(BuildContext context, String fullNameFolder) {
-    widget.state.pwd = fullNameFolder;
+    context.read<DirectoryBrowseState>().pwd = fullNameFolder;
     setState(() => loaded = false);
     getFoldersAndFiles();
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AppViewScaffold(
-          bodyWidget: FolderViewPage(
-            state: widget.state,
-            cubit: widget.cubit,
-          ),
-          bar: const MainBar(title: 'Wszystkie zdjęcia'),
-        ),
-      ),
-    );
   }
 
-  void goToImageView(
-    int index,
-    FolderViewCubit cubit,
-  ) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) => PhotoViewPage(
-          index: index,
-          cubit: cubit,
-        ),
-      ),
-    );
+  void goToImageView(int index) {
+    FolderViewCubit cubit = context.read<FolderViewCubit>();
+    cubit.startPhotoViewFrom(index);
   }
 
-  Future<bool> returnParent() async {
-    var cubit = widget.cubit;
-    var state = widget.state;
-    if (cubit.isBranchFolder(state)) {
-      cubit.goToParent(state);
+  Future<bool> returnParent(BuildContext context) async {
+    FolderViewCubit cubit = context.read<FolderViewCubit>();
+    String path = context.read<DirectoryBrowseState>().pwd;
+    if (cubit.isBranchFolder(path)) {
+      path = cubit.goToParentOf(path);
+      goToFolder(context, path);
+      return false;
     }
     return true;
   }
@@ -92,7 +63,7 @@ class _FolderViewPageState extends State<FolderViewPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => returnParent(),
+      onWillPop: () => returnParent(context),
       child: Builder(builder: (context) {
         return loaded
             ? GridView(
@@ -129,7 +100,7 @@ class _FolderViewPageState extends State<FolderViewPage> {
                 child: Icon(
                   Icons.folder_rounded,
                   color: Colors.grey,
-                  size: iconSize - 3 * fontSize,
+                  size: iconSize - fontSize,
                 ),
               ),
               Text(
@@ -147,8 +118,6 @@ class _FolderViewPageState extends State<FolderViewPage> {
   }
 
   Widget generateImage(BuildContext context, int index) {
-    FolderViewCubit cubit = widget.cubit;
-
     return SizedBox.square(
       dimension: PhotoUtils.size,
       child: Padding(
@@ -156,14 +125,14 @@ class _FolderViewPageState extends State<FolderViewPage> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(PhotoUtils.radius),
           child: IconButton(
-            onPressed: () => goToImageView(index, cubit),
+            onPressed: () => goToImageView(index),
             icon: CachedNetworkImage(
-              width: PhotoUtils.size,
-              height: PhotoUtils.size,
               imageUrl: _urls[index],
-              fit: BoxFit.cover,
               placeholder: (context, url) => const LoadingPhoto(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
+              fit: BoxFit.cover,
+              width: PhotoUtils.size,
+              height: PhotoUtils.size,
             ),
           ),
         ),
