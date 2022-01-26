@@ -10,12 +10,10 @@ class AuthGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
-        return state is SignedInState
-            ? AuthorizedRootPage(signedInState: state)
-            : const SignOutPage();
-      }),
-    );
+    return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+      return state is SignedInState
+          ? AuthorizedRootPage(signedInState: state)
+          : const SignOutPage();
+    });
   }
 }

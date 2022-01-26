@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
 import 'package:photo_tagger/pages/authenticate/auth_state.dart';
 

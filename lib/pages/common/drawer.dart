@@ -69,7 +69,7 @@ class NavDrawer extends StatelessWidget {
                     text: 'Wyloguj',
                     onClicked: () {
                       context.read<AuthCubit>().signOut;
-                      _selectedItem(context, MainRoutingMap.loginPage);
+                      //_selectedItem(context, MainRoutingMap.loginPage);
                       //context.read<AuthService>().signOut;
                     },
                   ),

@@ -23,40 +23,42 @@ class AddPhotosGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) => context.read<SignedInState>().addPhotosCubit,
-      child: BlocBuilder<AddPhotosCubit, AddPhotosState>(builder: (context, state) {
-        if (state is AddPhotosEmpty) {
-          return AppViewScaffold(
-            bodyWidget: const NoPhotoPage(),
-            actionPanel: const AddPhotoButton(),
-            bar: MainBar(title: title),
-          );
-        } else if (state is AddPhotosLoaded) {
-          return AppViewScaffold(
-            bodyWidget: GridPage(datas: state.datas),
-            actionPanel: const AddPhotoButton(),
-            bar: SendBar(title: title),
-          );
-        } else if (state is AddPhotosReadyToSend) {
-          return const ReadyToSendPage();
-        } else if (state is AddPhotosSending) {
-          return const SendingPhotosPage();
-        } else if (state is AddPhotosSucces) {
-          return const SuccessResultPage();
-        } else if (state is AddPhotosFailure) {
-          return const FailureResultPage();
-        } else if (state is TaggingPageState) {
-          return TaggerFormPage(data: state.data);
-        } else if (state is AddTagState) {
-          return AddItemDialog(
-            dropDownListItems: state.dropDownListItems,
-            data: state.data,
-          );
-        } else {
-          throw Exception('Unknown add photos state');
-        }
-      }),
+    return Scaffold(
+      body: Provider(
+        create: (_) => context.read<SignedInState>().addPhotosCubit,
+        child: BlocBuilder<AddPhotosCubit, AddPhotosState>(builder: (context, state) {
+          if (state is AddPhotosEmpty) {
+            return AppViewScaffold(
+              bodyWidget: const NoPhotoPage(),
+              actionPanel: const AddPhotoButton(),
+              bar: MainBar(title: title),
+            );
+          } else if (state is AddPhotosLoaded) {
+            return AppViewScaffold(
+              bodyWidget: GridPage(datas: state.datas),
+              actionPanel: const AddPhotoButton(),
+              bar: SendBar(title: title),
+            );
+          } else if (state is AddPhotosReadyToSend) {
+            return const ReadyToSendPage();
+          } else if (state is AddPhotosSending) {
+            return const SendingPhotosPage();
+          } else if (state is AddPhotosSucces) {
+            return const SuccessResultPage();
+          } else if (state is AddPhotosFailure) {
+            return const FailureResultPage();
+          } else if (state is TaggingPageState) {
+            return TaggerFormPage(data: state.data);
+          } else if (state is AddTagState) {
+            return AddItemDialog(
+              dropDownListItems: state.dropDownListItems,
+              data: state.data,
+            );
+          } else {
+            throw Exception('Unknown add photos state');
+          }
+        }),
+      ),
     );
   }
 }
