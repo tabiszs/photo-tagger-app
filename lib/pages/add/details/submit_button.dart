@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:provider/src/provider.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
     Key? key,
-    required this.validationKey,
+    required this.callback
   }) : super(key: key);
-  final GlobalKey<FormState> validationKey;
+  final VoidCallback callback;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +16,7 @@ class SubmitButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ElevatedButton(
-          onPressed: () {
-            if (validationKey.currentState!.validate()) {
-              context.read<PhotoData>().state = PhotoState.completed;
-              validationKey.currentState!.save();
-              context.read<AddPhotosCubit>().showGridView();
-            }
-          },
+          onPressed: callback,
           child: const Text("Zatwierdź"),
         ),
       ],

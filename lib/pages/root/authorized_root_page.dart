@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/add/add_photos_gate.dart';
-import 'package:photo_tagger/pages/authenticate/auth_state.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:provider/provider.dart';
 
 class AuthorizedRootPage extends StatelessWidget {

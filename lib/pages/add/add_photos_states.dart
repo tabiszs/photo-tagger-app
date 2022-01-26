@@ -1,4 +1,4 @@
-import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
 
 abstract class AddPhotosState {
   const AddPhotosState();

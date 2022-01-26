@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/data/info/tag_info.dart';
+import 'package:photo_tagger/data/photo/tag_info.dart';
 
 enum PhotoState {
   unreplenished,

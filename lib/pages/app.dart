@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/data/auth_service.dart';
-import 'package:photo_tagger/data/firestore_service.dart';
-import 'package:photo_tagger/data/storage_service.dart';
-import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
+import 'package:photo_tagger/data/service/auth_service.dart';
+import 'package:photo_tagger/data/service/firestore_service.dart';
+import 'package:photo_tagger/data/service/storage_service.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_cubit.dart';
 import 'package:photo_tagger/pages/root/root_app_page.dart';
 import 'package:provider/provider.dart';
 

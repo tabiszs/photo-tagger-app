@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
 
 class StorageService {
   const StorageService({required storage}) : _storage = storage;

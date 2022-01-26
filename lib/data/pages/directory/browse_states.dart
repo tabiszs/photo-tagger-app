@@ -1,5 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:photo_tagger/data/info/tag_info.dart';
+import 'package:photo_tagger/data/photo/tag_info.dart';
 
 abstract class BrowseState {
   const BrowseState();

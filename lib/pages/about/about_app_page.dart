@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/data/photo_utils.dart';
+import 'package:photo_tagger/data/utils/photo_utils.dart';
 
 class AboutAppPage extends StatelessWidget {
   const AboutAppPage({Key? key}) : super(key: key);

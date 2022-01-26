@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
 
 class AddItemDialog extends StatefulWidget {
   const AddItemDialog({

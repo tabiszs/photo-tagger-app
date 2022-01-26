@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
+import 'package:photo_tagger/data/tag/tag_type.dart';
 
 class FirestoreService {
   FirestoreService({required firestore}) : _firestore = firestore {
@@ -22,6 +23,20 @@ class FirestoreService {
         .add(data.tags.toJson())
         .then((value) => print("Tag Added"))
         .catchError((error) => print("Failed to add tag: $error"));
+  }
+
+  Future<List<TagType>> downloadTags() async {
+    List<TagType> tags = [];
+    var tagSnaps = await _tagRef.get();
+    var tagDocs = tagSnaps.docs;
+    for (int i = 0; i < tagDocs.length; ++i) {
+      String type = tagDocs[i].id;
+      var values =
+          tagDocs[i].data().map((key, value) => MapEntry<String, String>(key, value)).values;
+      TagType tagType = TagType(type: type, values: values.toList());
+      tags.add(tagType);
+    }
+    return tags;
   }
 
   Future<void> addTag(String genre, String tag) async {

@@ -3,9 +3,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:photo_tagger/common/loading_photo.dart';
-import 'package:photo_tagger/data/photo_utils.dart';
-import 'package:photo_tagger/pages/directory/browse_states.dart';
-import 'package:photo_tagger/pages/directory/folder_view_cubit.dart';
+import 'package:photo_tagger/data/utils/photo_utils.dart';
+import 'package:photo_tagger/data/pages/directory/browse_states.dart';
+import 'package:photo_tagger/data/pages/directory/folder_view_cubit.dart';
 import 'package:provider/src/provider.dart';
 
 class FolderViewPage extends StatefulWidget {

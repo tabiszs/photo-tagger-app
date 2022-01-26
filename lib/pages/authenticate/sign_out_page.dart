@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
-import 'package:photo_tagger/pages/authenticate/auth_state.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_cubit.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:photo_tagger/pages/authenticate/microsoft/sign_in_button.dart';
 
 class SignOutPage extends StatelessWidget {

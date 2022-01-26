@@ -13,7 +13,7 @@ import 'package:photo_tagger/pages/common/app_view_scaffold.dart';
 import 'package:photo_tagger/pages/add/grid/grid_page.dart';
 import 'package:photo_tagger/pages/add/grid/no_photo_page.dart';
 import 'package:photo_tagger/pages/add/grid/send_bar.dart';
-import 'package:photo_tagger/pages/authenticate/auth_state.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:provider/provider.dart';
 

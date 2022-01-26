@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/data/allowed_photo_extention.dart';
-import 'package:photo_tagger/data/firestore_service.dart';
-import 'package:photo_tagger/data/info/tag_info.dart';
-import 'package:photo_tagger/data/storage_service.dart';
+import 'package:photo_tagger/data/utils/allowed_photo_extention.dart';
+import 'package:photo_tagger/data/service/firestore_service.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
+import 'package:photo_tagger/data/photo/tag_info.dart';
+import 'package:photo_tagger/data/service/storage_service.dart';
+import 'package:photo_tagger/data/tag/tag_type.dart';
 import 'package:photo_tagger/pages/add/add_photos_states.dart';
-import 'package:photo_tagger/data/data.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit({
@@ -14,11 +15,23 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     required this.firestore,
   }) : super(const AddPhotosEmpty()) {
     emit(const AddPhotosEmpty());
+    downloadTags();
   }
   final StorageService storage;
   final FirestoreService firestore;
   late final StreamSubscription _sub;
   List<PhotoData> datas = [];
+  List<TagType> tags = [];
+  bool _loadedTagTypes = false;
+
+  void downloadTags() async {
+    tags = await firestore.downloadTags();
+    _loadedTagTypes = true;
+  }
+
+  List<TagType> getTagTypes() {
+    return tags;
+  }
 
   bool isAllCompleted() {
     for (int i = 0; i < datas.length; ++i) {
@@ -68,10 +81,6 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
       );
     }
     return newPhotoDatas;
-  }
-
-  void showGridView() {
-    emit(AddPhotosLoaded(datas: datas));
   }
 
   void showAddTagDialog(int index, List<String>? dropDownListItems) {

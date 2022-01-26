@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/common/loading_photo.dart';
-import 'package:photo_tagger/pages/directory/browse_states.dart';
-import 'package:photo_tagger/pages/directory/folder_view_cubit.dart';
+import 'package:photo_tagger/data/pages/directory/browse_states.dart';
+import 'package:photo_tagger/data/pages/directory/folder_view_cubit.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/src/provider.dart';
 

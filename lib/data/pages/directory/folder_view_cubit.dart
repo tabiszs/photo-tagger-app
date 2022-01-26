@@ -1,8 +1,8 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/data/storage_service.dart';
-import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
-import 'package:photo_tagger/pages/directory/browse_states.dart';
+import 'package:photo_tagger/data/service/storage_service.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_cubit.dart';
+import 'package:photo_tagger/data/pages/directory/browse_states.dart';
 
 class FolderViewCubit extends Cubit<BrowseState> {
   FolderViewCubit({required this.storage, required this.authCubit})
