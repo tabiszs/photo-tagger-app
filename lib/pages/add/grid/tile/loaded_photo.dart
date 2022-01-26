@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/photo_utils.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/data/data.dart';
+import 'package:photo_tagger/pages/add/details/tagger_form_page.dart';
 import 'package:provider/src/provider.dart';
 
 class LoadedPhoto extends StatelessWidget {
@@ -13,10 +14,15 @@ class LoadedPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int index = context.read<PhotoData>().index;
+    PhotoData data = context.read<AddPhotosCubit>().datas[index];
+
     return IconButton(
-      onPressed: () => context.read<AddPhotosCubit>().showTagPage(
-            context.read<PhotoData>().index,
-          ),
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => TaggerFormPage(data: data),
+        ),
+      ),
       // onLongPress: //TODO - możliwe grupowanie: tagowania lub usuwania,
       icon: ClipRRect(
         borderRadius: BorderRadius.circular(_radius),

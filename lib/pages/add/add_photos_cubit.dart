@@ -70,10 +70,6 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     return newPhotoDatas;
   }
 
-  void showTagPage(int index) {
-    emit(TaggingPageState(data: datas[index]));
-  }
-
   void showGridView() {
     emit(AddPhotosLoaded(datas: datas));
   }

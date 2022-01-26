@@ -16,16 +16,17 @@ class AuthCubit extends Cubit<AuthState> {
     required this.firestoreService,
   }) : super(const SignedOutState()) {
     _subscription = authService.isSignedInStream.listen((isSignedInEvent) {
-      // emit(isSignedInEvent
-      //     ? SignedInState(
-      //         user: authService.currentUser,
-      //         addPhotosCubit: AddPhotosCubit(
-      //           storage: storageService,
-      //           firestore: firestoreService,
-      //         ),
-      //       )
-      //     : const SignedOutState());
-      emit(const SignedOutState());
+      // TODO remove
+      emit(isSignedInEvent
+          ? SignedInState(
+              user: authService.currentUser,
+              addPhotosCubit: AddPhotosCubit(
+                storage: storageService,
+                firestore: firestoreService,
+              ),
+            )
+          : const SignedOutState());
+      // emit(const SignedOutState());
     });
   }
 

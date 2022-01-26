@@ -39,12 +39,6 @@ class AddPhotosFailure extends AddPhotosState {
   const AddPhotosFailure();
 }
 
-class TaggingPageState extends AddPhotosState {
-  const TaggingPageState({required this.data});
-
-  final PhotoData data;
-}
-
 class AddTagState extends AddPhotosState {
   const AddTagState({
     required this.data,

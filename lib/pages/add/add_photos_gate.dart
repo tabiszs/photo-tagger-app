@@ -47,8 +47,6 @@ class AddPhotosGate extends StatelessWidget {
             return const SuccessResultPage();
           } else if (state is AddPhotosFailure) {
             return const FailureResultPage();
-          } else if (state is TaggingPageState) {
-            return TaggerFormPage(data: state.data);
           } else if (state is AddTagState) {
             return AddItemDialog(
               dropDownListItems: state.dropDownListItems,
