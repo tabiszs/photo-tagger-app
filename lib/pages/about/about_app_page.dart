@@ -26,7 +26,7 @@ class AboutAppPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 SizedBox(height: 30),
-                Text('Wersja 1.0.0'),
+                Text('Wersja 0.1.0'),
                 SizedBox(height: 10),
                 Text('Stanisław Tabisz'),
                 SizedBox(height: 10),

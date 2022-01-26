@@ -32,4 +32,16 @@ class FolderViewCubit extends Cubit<BrowseState> {
   void startPhotoViewFrom(int index) {
     emit(PhotoBrowseState(index: index));
   }
+
+  bool isBranchFolder(DirectoryBrowseState state) {
+    return state.pwd != '/';
+  }
+
+  void goToParent(DirectoryBrowseState state) {
+    int lastSlash = state.pwd.lastIndexOf('/');
+    if (lastSlash <= 0) {
+      throw Exception('Nie znalezniono rodzica w ścieżce: $lastSlash');
+    }
+    state.pwd.substring(0, lastSlash);
+  }
 }

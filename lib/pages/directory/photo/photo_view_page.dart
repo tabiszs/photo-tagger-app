@@ -7,7 +7,13 @@ import 'package:photo_view/photo_view.dart';
 import 'package:provider/src/provider.dart';
 
 class PhotoViewPage extends StatefulWidget {
-  const PhotoViewPage({Key? key}) : super(key: key);
+  const PhotoViewPage({
+    required this.index,
+    required this.cubit,
+    Key? key,
+  }) : super(key: key);
+  final int index;
+  final FolderViewCubit cubit;
 
   @override
   State<PhotoViewPage> createState() => _PhotoViewPageState();
@@ -18,9 +24,8 @@ class _PhotoViewPageState extends State<PhotoViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    final FolderViewCubit cubit = context.read<FolderViewCubit>();
-    final int currIdx = context.read<PhotoBrowseState>().index;
-    final PageController controller = PageController(initialPage: currIdx);
+    final FolderViewCubit cubit = widget.cubit;
+    final PageController controller = PageController(initialPage: widget.index);
     final List<String> urls = cubit.urls;
 
     return PageView(

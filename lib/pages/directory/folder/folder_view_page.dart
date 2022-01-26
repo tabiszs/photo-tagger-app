@@ -4,12 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:photo_tagger/common/loading_photo.dart';
 import 'package:photo_tagger/data/photo_utils.dart';
+import 'package:photo_tagger/pages/common/app_view_scaffold.dart';
+import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:photo_tagger/pages/directory/browse_states.dart';
+import 'package:photo_tagger/pages/directory/details/details_browse_page.dart';
 import 'package:photo_tagger/pages/directory/folder_view_cubit.dart';
+import 'package:photo_tagger/pages/directory/photo/photo_view_page.dart';
 import 'package:provider/src/provider.dart';
 
 class FolderViewPage extends StatefulWidget {
-  const FolderViewPage({Key? key}) : super(key: key);
+  const FolderViewPage({
+    required this.state,
+    required this.cubit,
+    Key? key,
+  }) : super(key: key);
+  final DirectoryBrowseState state;
+  final FolderViewCubit cubit;
 
   @override
   _FolderViewPageState createState() => _FolderViewPageState();
@@ -29,8 +39,8 @@ class _FolderViewPageState extends State<FolderViewPage> {
   }
 
   void getFoldersAndFiles() async {
-    String pwd = context.read<DirectoryBrowseState>().pwd;
-    FolderViewCubit cubit = context.read<FolderViewCubit>();
+    String pwd = widget.state.pwd;
+    FolderViewCubit cubit = widget.cubit;
     _refList = await cubit.getFoldersAndFilesFrom(pwd);
     _urls = await cubit.getUrlFiles();
     setState(() {
@@ -39,42 +49,71 @@ class _FolderViewPageState extends State<FolderViewPage> {
   }
 
   void goToFolder(BuildContext context, String fullNameFolder) {
-    context.read<DirectoryBrowseState>().pwd = fullNameFolder;
+    widget.state.pwd = fullNameFolder;
     setState(() => loaded = false);
     getFoldersAndFiles();
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const FolderViewPage()),
+      MaterialPageRoute(
+        builder: (context) => AppViewScaffold(
+          bodyWidget: FolderViewPage(
+            state: widget.state,
+            cubit: widget.cubit,
+          ),
+          bar: const MainBar(title: 'Wszystkie zdjęcia'),
+        ),
+      ),
     );
   }
 
-  void goToImageView(int index) {
-    FolderViewCubit cubit = context.read<FolderViewCubit>();
-    cubit.startPhotoViewFrom(index);
+  void goToImageView(
+    int index,
+    FolderViewCubit cubit,
+  ) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PhotoViewPage(
+          index: index,
+          cubit: cubit,
+        ),
+      ),
+    );
+  }
+
+  Future<bool> returnParent() async {
+    var cubit = widget.cubit;
+    var state = widget.state;
+    if (cubit.isBranchFolder(state)) {
+      cubit.goToParent(state);
+    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return loaded
-          ? GridView(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                mainAxisSpacing: 4,
-                crossAxisSpacing: 4,
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              children: [
-                ...List.generate(_refList.prefixes.length, (index) {
-                  return generateFolder(context, index);
-                }),
-                ...List.generate(_urls.length, (index) {
-                  return generateImage(context, index);
-                }),
-              ],
-            )
-          : const Center(child: CircularProgressIndicator());
-    });
+    return WillPopScope(
+      onWillPop: () => returnParent(),
+      child: Builder(builder: (context) {
+        return loaded
+            ? GridView(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                children: [
+                  ...List.generate(_refList.prefixes.length, (index) {
+                    return generateFolder(context, index);
+                  }),
+                  ...List.generate(_urls.length, (index) {
+                    return generateImage(context, index);
+                  }),
+                ],
+              )
+            : const Center(child: CircularProgressIndicator());
+      }),
+    );
   }
 
   Widget generateFolder(BuildContext context, int index) {
@@ -90,7 +129,7 @@ class _FolderViewPageState extends State<FolderViewPage> {
                 child: Icon(
                   Icons.folder_rounded,
                   color: Colors.grey,
-                  size: iconSize - fontSize,
+                  size: iconSize - 3 * fontSize,
                 ),
               ),
               Text(
@@ -108,6 +147,8 @@ class _FolderViewPageState extends State<FolderViewPage> {
   }
 
   Widget generateImage(BuildContext context, int index) {
+    FolderViewCubit cubit = widget.cubit;
+
     return SizedBox.square(
       dimension: PhotoUtils.size,
       child: Padding(
@@ -115,12 +156,14 @@ class _FolderViewPageState extends State<FolderViewPage> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(PhotoUtils.radius),
           child: IconButton(
-            onPressed: () => goToImageView(index),
+            onPressed: () => goToImageView(index, cubit),
             icon: CachedNetworkImage(
+              width: PhotoUtils.size,
+              height: PhotoUtils.size,
               imageUrl: _urls[index],
+              fit: BoxFit.cover,
               placeholder: (context, url) => const LoadingPhoto(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
-              fit: BoxFit.cover,
             ),
           ),
         ),

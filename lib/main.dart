@@ -41,7 +41,8 @@ class _AppState extends State<_App> {
   }
 
   Future<FirebaseApp> initializeFirebaseApp() async {
-    await Future.delayed(splashScreenDuration);
+    // TODO uncomment
+    //await Future.delayed(splashScreenDuration);
     return _initialization;
   }
 }
