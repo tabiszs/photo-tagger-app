@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
 import 'package:photo_tagger/pages/authenticate/auth_state.dart';
 
@@ -18,9 +19,7 @@ class SignInButton extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         return ElevatedButton(
-          child: state is SignedOutState
-              ? const DefaultState()
-              : const ProcessingState(),
+          child: state is SignedOutState ? const DefaultState() : const ProcessingState(),
           onPressed: state is SignedOutState
               ? () => context.read<AuthCubit>().signInWithEmailAndPassword(
                     email.text,
@@ -28,8 +27,7 @@ class SignInButton extends StatelessWidget {
                   )
               : null,
           style: ButtonStyle(
-            side: MaterialStateProperty.all(
-                const BorderSide(color: Colors.black26)),
+            side: MaterialStateProperty.all(const BorderSide(color: Colors.black26)),
             backgroundColor: MaterialStateProperty.all(Colors.white),
             foregroundColor: MaterialStateProperty.all(Colors.black),
           ),
@@ -37,6 +35,19 @@ class SignInButton extends StatelessWidget {
       },
     );
   }
+
+  // void authGate(BuildContext context) async {
+  //   AuthCubit cubit = context.read<AuthCubit>();
+  //   bool signedIn = await cubit.signInWithEmailAndPassword(email.text, password.text);
+  //   if (signedIn) {
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute<void>(
+  //         builder: (BuildContext context) => const AuthorizedRootPage(),
+  //       ),
+  //     );
+  //   }
+  // }
 }
 
 class DefaultState extends StatelessWidget {

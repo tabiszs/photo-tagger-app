@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/main_route_map.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
+import 'package:photo_tagger/pages/authenticate/sign_out_page.dart';
 import 'package:provider/src/provider.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -66,8 +67,11 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.logout_outlined,
                     text: 'Wyloguj',
-                    onClicked: context.read<AuthCubit>().signOut,
-                    //onClicked: context.read<AuthService>().signOut,
+                    onClicked: () {
+                      context.read<AuthCubit>().signOut;
+                      _selectedItem(context, MainRoutingMap.loginPage);
+                      //context.read<AuthService>().signOut;
+                    },
                   ),
                 ],
               ),
@@ -190,7 +194,9 @@ class NavDrawer extends StatelessWidget {
         Navigator.of(context).pushNamed(MainRoutingMap.aboutAppPage);
         break;
       case MainRoutingMap.loginPage:
-        Navigator.of(context).pushNamed(MainRoutingMap.loginPage);
+        Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
+          builder: (BuildContext context) => const SignOutPage(),
+        ));
         break;
     }
   }

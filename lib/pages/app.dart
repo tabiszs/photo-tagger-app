@@ -7,7 +7,7 @@ import 'package:photo_tagger/data/auth_service.dart';
 import 'package:photo_tagger/data/firestore_service.dart';
 import 'package:photo_tagger/data/storage_service.dart';
 import 'package:photo_tagger/pages/authenticate/auth_cubit.dart';
-import 'package:photo_tagger/pages/authenticate/auth_gate.dart';
+import 'package:photo_tagger/pages/root/root_app_page.dart';
 import 'package:provider/provider.dart';
 
 class PhotoTaggerApp extends StatelessWidget {
@@ -27,7 +27,7 @@ class PhotoTaggerApp extends StatelessWidget {
           storageService: ctx.read<StorageService>(),
           firestoreService: ctx.read<FirestoreService>(),
         ),
-        child: const AuthGate(),
+        child: const RootAppPage(),
       ),
     );
   }

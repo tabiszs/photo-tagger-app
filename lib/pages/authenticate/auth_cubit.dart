@@ -14,25 +14,18 @@ class AuthCubit extends Cubit<AuthState> {
     required this.authService,
     required this.storageService,
     required this.firestoreService,
-  }) : super(authService.isSignedIn
-            ? SignedInState(
-                user: authService.currentUser,
-                addPhotosCubit: AddPhotosCubit(
-                  storage: storageService,
-                  firestore: firestoreService,
-                ),
-              )
-            : const SignedOutState()) {
+  }) : super(const SignedOutState()) {
     _subscription = authService.isSignedInStream.listen((isSignedInEvent) {
-      emit(isSignedInEvent
-          ? SignedInState(
-              user: authService.currentUser,
-              addPhotosCubit: AddPhotosCubit(
-                storage: storageService,
-                firestore: firestoreService,
-              ),
-            )
-          : const SignedOutState());
+      // emit(isSignedInEvent
+      //     ? SignedInState(
+      //         user: authService.currentUser,
+      //         addPhotosCubit: AddPhotosCubit(
+      //           storage: storageService,
+      //           firestore: firestoreService,
+      //         ),
+      //       )
+      //     : const SignedOutState());
+      emit(const SignedOutState());
     });
   }
 
@@ -42,16 +35,18 @@ class AuthCubit extends Cubit<AuthState> {
   StreamSubscription? _subscription;
   List<String> cachedUrls = [];
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<bool> signInWithEmailAndPassword(String email, String password) async {
     emit(const SigningInState());
     await Future.delayed(const Duration(seconds: 1));
+    bool result = false;
 
     final online = await _hasNetwork();
     if (online) {
-      _signIn(email, password);
+      result = await _signIn(email, password);
     } else {
       emit(const SignedOutState(error: 'Internet jest niedostępny.'));
     }
+    return result;
   }
 
   Future<void> signOut() async {
@@ -70,7 +65,9 @@ class AuthCubit extends Cubit<AuthState> {
     cachedUrls.add(url);
   }
 
-  void _signIn(String email, String password) async {
+  Future<bool> _signIn(String email, String password) async {
+    bool signInResult = false;
+
     try {
       final result = await authService.signInWithEmailAndPassword(email, password);
       switch (result) {
@@ -82,6 +79,7 @@ class AuthCubit extends Cubit<AuthState> {
               firestore: firestoreService,
             ),
           ));
+          signInResult = true;
           break;
         case SignInResult.invalidCredentials:
           emit(const SignedOutState(error: 'Nieprawidłowe dane.'));
@@ -90,6 +88,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (_) {
       emit(const SignedOutState(error: 'Nieznany błąd.'));
     }
+    return signInResult;
   }
 
   // https://stackoverflow.com/questions/49648022/check-whether-there-is-an-internet-connection-available-on-flutter-app
