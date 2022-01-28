@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/add_photos_states.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
-import 'package:photo_tagger/pages/add/details/tagger_form_page.dart';
 import 'package:photo_tagger/pages/add/failure/failure_page.dart';
 import 'package:photo_tagger/pages/add/ready_to_send_page.dart';
 import 'package:photo_tagger/pages/add/sending/sending_photos_page.dart';

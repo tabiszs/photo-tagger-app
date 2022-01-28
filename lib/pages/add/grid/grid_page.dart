@@ -3,16 +3,10 @@ import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/pages/add/grid/tile/photo_tile.dart';
 import 'package:provider/provider.dart';
 
-class GridPage extends StatefulWidget {
+class GridPage extends StatelessWidget {
   const GridPage({Key? key, required this.datas}) : super(key: key);
-
   final List<PhotoData> datas;
 
-  @override
-  State<GridPage> createState() => _GridPageState();
-}
-
-class _GridPageState extends State<GridPage> {
   @override
   Widget build(BuildContext context) {
     return GridView(
@@ -23,10 +17,10 @@ class _GridPageState extends State<GridPage> {
       ),
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
-        ...List.generate(widget.datas.length, (index) {
+        ...List.generate(datas.length, (index) {
           return Provider(
-            create: (_) => widget.datas[index],
-            child: PhotoTile(photoData: widget.datas[index]),
+            create: (_) => datas[index],
+            child: PhotoTile(photoData: datas[index]),
           );
         }),
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:photo_tagger/data/pages/add/details/tags_form_bloc.dart';
+import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/pages/add/details/submit_button.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class DetailsBody extends StatelessWidget {
 
     return FormBlocListener<TagsFormBloc, String, String>(
       onSuccess: (context, state) {
-        context.read<PhotoData>().state = PhotoState.completed;
+        int index = context.read<PhotoData>().index;
+        context.read<SignedInState>().addPhotosCubit.datas[index].state = PhotoState.completed;
         Navigator.of(context).pop();
       },
       onFailure: (context, state) {

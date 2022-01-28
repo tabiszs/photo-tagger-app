@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
+import 'package:photo_tagger/data/photo/photo_data_provider.dart';
 import 'package:photo_tagger/data/utils/photo_utils.dart';
 import 'package:photo_tagger/data/tag/tag_type.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
@@ -16,7 +17,7 @@ class LoadedPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int index = context.read<PhotoData>().index;
-    PhotoData data = context.read<AddPhotosCubit>().datas[index];
+    PhotoData data = context.watch<AddPhotosCubit>().datas[index];
 
     return IconButton(
       onPressed: () {
@@ -35,6 +36,7 @@ class LoadedPhoto extends StatelessWidget {
         borderRadius: BorderRadius.circular(_radius),
         child: Container(
           color: _getValidationColor(
+            //PhotoDataProvider.of(context).state,
             context.select<PhotoData, PhotoState>((data) => data.state),
           ),
           child: SizedBox.square(
