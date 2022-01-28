@@ -7,16 +7,21 @@ enum PhotoState {
   completed,
 }
 
-class PhotoData {
+class PhotoData with ChangeNotifier {
+  PhotoState _state = PhotoState.unreplenished;
   final String path;
-  PhotoState state;
-  TagInfo tags;
-  int index;
+  final TagInfo tags;
+  final int index;
+
+  PhotoState get state => _state;
+  set state(PhotoState state) {
+    _state = state;
+    notifyListeners();
+  }
 
   PhotoData({
     required this.index,
     required this.path,
     required this.tags,
-    this.state = PhotoState.unreplenished,
   });
 }

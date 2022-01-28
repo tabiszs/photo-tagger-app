@@ -8,7 +8,11 @@ import 'package:photo_tagger/pages/add/details/details_body.dart';
 import 'package:provider/src/provider.dart';
 
 class TaggerFormPage extends StatelessWidget {
-  const TaggerFormPage({Key? key, required this.data, required this.tags}) : super(key: key);
+  const TaggerFormPage({
+    Key? key,
+    required this.data,
+    required this.tags,
+  }) : super(key: key);
   final PhotoData data;
   final List<TagType> tags;
 

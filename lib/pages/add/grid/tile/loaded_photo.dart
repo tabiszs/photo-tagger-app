@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
-import 'package:photo_tagger/data/photo/photo_data_provider.dart';
 import 'package:photo_tagger/data/utils/photo_utils.dart';
 import 'package:photo_tagger/data/tag/tag_type.dart';
 import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/details/tagger_form_page.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
 class LoadedPhoto extends StatelessWidget {
@@ -18,7 +18,6 @@ class LoadedPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     int index = context.read<PhotoData>().index;
     PhotoData data = context.read<AddPhotosCubit>().datas[index];
-
     return IconButton(
       onPressed: () {
         List<TagType> tags = context.read<AddPhotosCubit>().tags;
@@ -34,24 +33,27 @@ class LoadedPhoto extends StatelessWidget {
       // onLongPress: //TODO - możliwe grupowanie: tagowania lub usuwania,
       icon: ClipRRect(
         borderRadius: BorderRadius.circular(_radius),
-        child: Container(
-          color: _getValidationColor(
-            //PhotoDataProvider.of(context).state,
-            context.select<AddPhotosCubit, PhotoState>((cubit) => cubit.datas[index].state),
-          ),
-          child: SizedBox.square(
-            dimension: _size,
-            child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(_radius - 3),
-                  child: Image(
-                    image: image,
-                    fit: BoxFit.cover,
-                  ),
-                )),
-          ),
-        ),
+        child: Consumer<PhotoData>(builder: (context, photoData, child) {
+          return Container(
+            color: _getValidationColor(
+              photoData.state,
+              //PhotoDataProvider.of(context).state,
+              //context.select<AddPhotosCubit, PhotoState>((cubit) => cubit.datas[index].state),
+            ),
+            child: SizedBox.square(
+              dimension: _size,
+              child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(_radius - 3),
+                    child: Image(
+                      image: image,
+                      fit: BoxFit.cover,
+                    ),
+                  )),
+            ),
+          );
+        }),
       ),
     );
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:photo_tagger/data/pages/add/details/tags_form_bloc.dart';
-import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/tag/tags.dart';
 import 'package:photo_tagger/pages/add/details/submit_button.dart';
 import 'package:provider/provider.dart';
 
@@ -16,9 +15,7 @@ class DetailsBody extends StatelessWidget {
 
     return FormBlocListener<TagsFormBloc, String, String>(
       onSuccess: (context, state) {
-        int index = context.read<PhotoData>().index;
-        context.read<SignedInState>().addPhotosCubit.datas[index].state = PhotoState.completed;
-        context.read<AddPhotosCubit>().updateTiles();
+        context.read<PhotoData>().state = PhotoState.completed;
         Navigator.of(context).pop();
       },
       onFailure: (context, state) {
@@ -34,17 +31,51 @@ class DetailsBody extends StatelessWidget {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: <Widget>[
-              ...List.generate(formBloc.dropDownTags.length, (int index) {
-                return DropdownFieldBlocBuilder<String>(
-                  selectFieldBloc: formBloc.selectFieldBlocs[index],
-                  decoration: InputDecoration(
-                    labelText: formBloc.dropDownTags[index].type,
-                  ),
-                  itemBuilder: (context, value) => FieldItem(
-                    child: Text(value),
-                  ),
-                );
-              }),
+              DropdownFieldBlocBuilder<String>(
+                selectFieldBloc: formBloc.activitySelectFieldBloc,
+                decoration: const InputDecoration(
+                  labelText: Tags.activity,
+                ),
+                itemBuilder: (context, value) => FieldItem(
+                  child: Text(value),
+                ),
+              ),
+              DropdownFieldBlocBuilder<String>(
+                selectFieldBloc: formBloc.branchSelectFieldBloc,
+                decoration: const InputDecoration(
+                  labelText: Tags.branch,
+                ),
+                itemBuilder: (context, value) => FieldItem(
+                  child: Text(value),
+                ),
+              ),
+              DropdownFieldBlocBuilder<String>(
+                selectFieldBloc: formBloc.personSelectFieldBloc,
+                decoration: const InputDecoration(
+                  labelText: Tags.person,
+                ),
+                itemBuilder: (context, value) => FieldItem(
+                  child: Text(value),
+                ),
+              ),
+              DropdownFieldBlocBuilder<String>(
+                selectFieldBloc: formBloc.streamSelectFieldBloc,
+                decoration: const InputDecoration(
+                  labelText: Tags.stream,
+                ),
+                itemBuilder: (context, value) => FieldItem(
+                  child: Text(value),
+                ),
+              ),
+              DropdownFieldBlocBuilder<String>(
+                selectFieldBloc: formBloc.eventSelectFieldBloc,
+                decoration: const InputDecoration(
+                  labelText: Tags.event,
+                ),
+                itemBuilder: (context, value) => FieldItem(
+                  child: Text(value),
+                ),
+              ),
               TextFieldBlocBuilder(
                 textFieldBloc: formBloc.authorTextFieldBloc,
                 maxLines: 1,
@@ -68,6 +99,17 @@ class DetailsBody extends StatelessWidget {
                   helperText: 'Wybierz datę',
                 ),
               ),
+              ...List.generate(formBloc.dropDownTags.length, (int index) {
+                return DropdownFieldBlocBuilder<String>(
+                  selectFieldBloc: formBloc.selectFieldBlocs[index],
+                  decoration: InputDecoration(
+                    labelText: formBloc.dropDownTags[index].type,
+                  ),
+                  itemBuilder: (context, value) => FieldItem(
+                    child: Text(value),
+                  ),
+                );
+              }),
               SubmitButton(
                 callback: formBloc.submit,
               ),

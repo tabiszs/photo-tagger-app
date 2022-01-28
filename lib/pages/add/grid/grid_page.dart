@@ -18,7 +18,7 @@ class GridPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       children: [
         ...List.generate(datas.length, (index) {
-          return Provider(
+          return ChangeNotifierProvider(
             create: (_) => datas[index],
             child: PhotoTile(photoData: datas[index]),
           );
