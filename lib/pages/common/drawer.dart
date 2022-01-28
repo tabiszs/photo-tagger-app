@@ -183,25 +183,13 @@ class NavDrawer extends StatelessWidget {
   void _selectedItem(BuildContext context, String path) {
     switch (path) {
       case MainRoutingMap.addPhotosPage:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => const AddPhotosGate(),
-          ),
-        );
+        Navigator.of(context).pushReplacementNamed(MainRoutingMap.addPhotosPage);
         break;
       case MainRoutingMap.folderViewPage:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => const FolderViewGate(),
-          ),
-        );
+        Navigator.of(context).pushReplacementNamed(MainRoutingMap.folderViewPage);
         break;
       case MainRoutingMap.aboutAppPage:
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => const AboutAppPage(),
-          ),
-        );
+        Navigator.of(context).pushNamed(MainRoutingMap.aboutAppPage);
         break;
     }
   }
