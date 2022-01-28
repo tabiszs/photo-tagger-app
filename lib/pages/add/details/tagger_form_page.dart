@@ -55,8 +55,6 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
       child: BlocProvider(
         create: (context) => TagsFormBloc(tags: tags, data: data),
         child: Builder(builder: (context) {
-          final formBloc = BlocProvider.of<TagsFormBloc>(context);
-
           return Theme(
             data: Theme.of(context).copyWith(
               inputDecorationTheme: InputDecorationTheme(
@@ -67,7 +65,7 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
             ),
             child: Scaffold(
               appBar: AppBar(
-                title: Text('Zdjęcie ' + widget.data.index.toString()),
+                title: Text('Zdjęcie ' + data.index.toString()),
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () => Navigator.of(context).pop(),
@@ -75,47 +73,6 @@ class _TaggerFormPageState extends State<TaggerFormPage> {
                 centerTitle: true,
               ),
               body: const DetailsBody(),
-              // Form(
-              //   key: _key,
-              //   child: FormBlocListener<TagsFormBloc, String, String>(
-              //     onSuccess: (context, state) {
-              //       Navigator.of(context).pop();
-              //     },
-              //     onFailure: (context, state) {
-              //       ScaffoldMessenger.of(context)
-              //           .showSnackBar(SnackBar(content: Text(state.failureResponse!)));
-              //     },
-              //     child: Padding(
-              //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              //       child: Column(
-              //         children: [
-              //           const SizedBox(height: 8),
-              //           // ...List.generate(
-              //           //   tags.length,
-              //           //   (int idx) => DropDownFormTile(
-              //           //     dropDownMenuItems: dropdownMenus[idx],
-              //           //     title: tags[idx].type,
-              //           //   ),
-              //           // ),
-              //           DataTimeTile(validationKey: _key),
-              //           DateTimeFieldBlocBuilder(
-              //             dateTimeFieldBloc: formBloc.creationDateTime,
-              //             format: DateFormat('dd-MM-yyyy'),
-              //             initialDate: DateTime.now(),
-              //             firstDate: DateTime(1900),
-              //             lastDate: DateTime.now(),
-              //             decoration: const InputDecoration(
-              //               labelText: 'Data utworzenia',
-              //               prefixIcon: Icon(Icons.calendar_today_outlined),
-              //               helperText: 'Wybierz datę',
-              //             ),
-              //           ),
-              //           SubmitButton(validationKey: _key),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ),
           );
         }),

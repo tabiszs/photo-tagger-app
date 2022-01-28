@@ -9,7 +9,6 @@ class TagsFormBloc extends FormBloc<String, String> {
     required this.data,
   }) {
     addSelectFieldBloc();
-    addErrors();
     addFieldBlocs(fieldBlocs: [
       creationDateTime,
       authorTextFieldBloc,
@@ -27,8 +26,8 @@ class TagsFormBloc extends FormBloc<String, String> {
   InputFieldBloc<DateTime?, dynamic> creationDateTime =
       InputFieldBloc<DateTime?, Object>(initialValue: null);
 
-  void addErrors() {
-    creationDateTime.addFieldError('Pole nie może być puste!');
+  void addErrorFor(SingleFieldBloc bloc, String message) {
+    bloc.addFieldError(message);
   }
 
   void addSelectFieldBloc() {
@@ -59,14 +58,33 @@ class TagsFormBloc extends FormBloc<String, String> {
     }
   }
 
+  void checkForms() {
+    bool error = false;
+    if (authorTextFieldBloc.value.length < 3) {
+      addErrorFor(authorTextFieldBloc, 'Zbyt krótka nazwa!');
+      error = true;
+    }
+    if (authorTextFieldBloc.value == '') {
+      addErrorFor(authorTextFieldBloc, 'Pole nie może być puste!');
+      error = true;
+    }
+    if (creationDateTime.value == null) {
+      addErrorFor(creationDateTime, 'Pole nie może być puste!');
+      error = true;
+    }
+    if (error) {
+      throw Exception('Nie poprawne dane');
+    }
+  }
+
   @override
   void onSubmitting() async {
     try {
       await Future<void>.delayed(const Duration(milliseconds: 500));
-      // business logic
+      checkForms();
       emitSuccess(canSubmitAgain: true);
     } catch (e) {
-      emitFailure();
+      emitFailure(failureResponse: 'Uzupełnij dane');
     }
   }
 }

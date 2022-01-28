@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:photo_tagger/data/pages/add/details/tags_form_bloc.dart';
+import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/pages/add/details/submit_button.dart';
+import 'package:provider/provider.dart';
 
 class DetailsBody extends StatelessWidget {
   const DetailsBody({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class DetailsBody extends StatelessWidget {
 
     return FormBlocListener<TagsFormBloc, String, String>(
       onSuccess: (context, state) {
+        context.read<PhotoData>().state = PhotoState.completed;
         Navigator.of(context).pop();
       },
       onFailure: (context, state) {
@@ -40,6 +43,9 @@ class DetailsBody extends StatelessWidget {
               }),
               TextFieldBlocBuilder(
                 textFieldBloc: formBloc.authorTextFieldBloc,
+                maxLines: 1,
+                maxLength: 50,
+                keyboardType: TextInputType.name,
                 decoration: const InputDecoration(
                   labelText: 'Autor',
                   prefixIcon: Icon(Icons.text_fields),
@@ -61,7 +67,6 @@ class DetailsBody extends StatelessWidget {
               SubmitButton(
                 callback: formBloc.submit,
               ),
-              //SubmitButton(validationKey: _key),
             ],
           ),
         ),
