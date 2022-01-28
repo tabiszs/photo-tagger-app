@@ -29,10 +29,6 @@ class FolderViewCubit extends Cubit<BrowseState> {
     return urls;
   }
 
-  void startPhotoViewFrom(int index) {
-    emit(PhotoBrowseState(index: index));
-  }
-
   bool isBranchFolder(String path) {
     return path != '/';
   }

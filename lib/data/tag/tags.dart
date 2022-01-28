@@ -6,4 +6,8 @@ class Tags {
   static const String person = 'osoba';
   static const String stream = 'strumień';
   static const String event = 'wydarzenie';
+
+  static const String email = 'email';
+  static const String sentDateTime = 'sentDateTime';
+  static const String pathInCloud = 'path';
 }

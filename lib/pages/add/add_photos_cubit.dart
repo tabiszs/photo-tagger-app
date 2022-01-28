@@ -13,9 +13,11 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit({
     required this.storage,
     required this.firestore,
+    required String? email,
   }) : super(const AddPhotosEmpty()) {
     emit(const AddPhotosEmpty());
     downloadTags();
+    _email = email;
   }
   final StorageService storage;
   final FirestoreService firestore;
@@ -23,6 +25,7 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
   List<PhotoData> datas = [];
   List<TagType> tags = [];
   bool _loadedTagTypes = false;
+  String? _email;
 
   void downloadTags() async {
     tags = await firestore.downloadTags();
@@ -40,10 +43,6 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
       }
     }
     return true;
-  }
-
-  void updateTiles() {
-    emit(AddPhotosLoaded(datas: datas));
   }
 
   void addPhoto() async {
@@ -119,14 +118,24 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
 
   Future<void> sendPhotosAndTags() async {
     for (int i = 0; i < datas.length; ++i) {
-      await uploadPhoto(i);
+      String? path = await uploadPhoto(i);
+      if (path == null) {
+        throw Exception('Nie udało się przesłać zdjęcia');
+      }
+      addLastTags(i, path);
       await uploadTags(i);
       // update addPhotosSendingPage
     }
   }
 
-  Future<void> uploadPhoto(int i) async {
-    await storage.uploadFile(datas[i]);
+  Future<String?> uploadPhoto(int i) async {
+    return await storage.uploadFile(datas[i]);
+  }
+
+  void addLastTags(int i, String pathInCloud) {
+    datas[i].tags.email = _email;
+    datas[i].tags.pathInCloud = pathInCloud;
+    datas[i].tags.sentDateTime = DateTime.now();
   }
 
   Future<void> uploadTags(int i) async {

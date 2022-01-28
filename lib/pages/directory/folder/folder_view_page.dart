@@ -6,6 +6,7 @@ import 'package:photo_tagger/common/loading_photo.dart';
 import 'package:photo_tagger/data/utils/photo_utils.dart';
 import 'package:photo_tagger/data/pages/directory/browse_states.dart';
 import 'package:photo_tagger/data/pages/directory/folder_view_cubit.dart';
+import 'package:photo_tagger/pages/directory/photo/photo_view_page.dart';
 import 'package:provider/src/provider.dart';
 
 class FolderViewPage extends StatefulWidget {
@@ -46,7 +47,15 @@ class _FolderViewPageState extends State<FolderViewPage> {
 
   void goToImageView(int index) {
     FolderViewCubit cubit = context.read<FolderViewCubit>();
-    cubit.startPhotoViewFrom(index);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => PhotoViewPage(
+          index: index,
+          cubit: cubit,
+        ),
+      ),
+    );
   }
 
   Future<bool> returnParent(BuildContext context) async {

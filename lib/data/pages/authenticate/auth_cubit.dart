@@ -23,6 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
               addPhotosCubit: AddPhotosCubit(
                 storage: storageService,
                 firestore: firestoreService,
+                email: authService.currentUser?.email,
               ),
             )
           : const SignedOutState());
@@ -78,6 +79,7 @@ class AuthCubit extends Cubit<AuthState> {
             addPhotosCubit: AddPhotosCubit(
               storage: storageService,
               firestore: firestoreService,
+              email: authService.currentUser?.email,
             ),
           ));
           signInResult = true;

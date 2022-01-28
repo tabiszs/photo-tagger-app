@@ -13,7 +13,9 @@ class TagInfo {
   // String? place;
   // DateTime? uploadDate;
   // Uri? sourceURL;
-  //String email;
+  String? email;
+  String? pathInCloud;
+  DateTime? sentDateTime;
 
   TagInfo({
     this.creationDate,
@@ -45,6 +47,9 @@ class TagInfo {
       Tags.person: person,
       Tags.stream: stream,
       Tags.event: event,
+      Tags.email: email,
+      Tags.sentDateTime: sentDateTime,
+      Tags.pathInCloud: pathInCloud,
     };
   }
 }

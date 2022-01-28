@@ -8,39 +8,38 @@ class StorageService {
 
   final FirebaseStorage _storage;
 
-  Future<void> uploadFile(PhotoData data) async {
+  Future<String?> uploadFile(PhotoData data) async {
     File file = File(data.path);
-    String fileNameWithExt = data.path.split('/').last;
-    String nameInCloud = DateTime.now().millisecondsSinceEpoch.toString() + '.' + fileNameWithExt;
-    // String pathInCloud = '/' +
-    //     (data.tags.branch ?? '') +
-    //     '/' +
-    //     (data.tags.activity ?? '') +
-    //     '/' +
-    //     (data.tags.place ?? '') +
-    //     '/' +
-    //     (data.tags.author ?? '') +
-    //     '/' +
-    //     nameInCloud;
+    String name = nameInCloud(data);
+    String path = pathInCloud(data, name);
 
     try {
-      await _storage.ref(/*pathInCloud*/ nameInCloud).putFile(file);
+      var referece = _storage.ref(path);
+      referece.putFile(file);
+      return referece.fullPath;
     } on FirebaseException catch (e) {
-      // e.g, e.code == 'canceled'
       rethrow;
     }
   }
 
+  String nameInCloud(PhotoData data) {
+    String fileNameWithExt = data.path.split('/').last;
+    return DateTime.now().millisecondsSinceEpoch.toString() + '.' + fileNameWithExt;
+  }
+
+  String pathInCloud(PhotoData data, String name) {
+    return '/' +
+        (data.tags.branch ?? '') +
+        '/' +
+        (data.tags.activity ?? '') +
+        '/' +
+        (data.tags.author ?? '') +
+        '/' +
+        name;
+  }
+
   Future<ListResult> listAllFolder(String fullPathFolder) async {
     ListResult result = await _storage.ref(fullPathFolder).listAll();
-
-    for (var ref in result.items) {
-      print('Found file: $ref');
-    }
-
-    for (var ref in result.prefixes) {
-      print('Found directory: $ref');
-    }
     return result;
   }
 
