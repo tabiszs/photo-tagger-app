@@ -17,7 +17,7 @@ class LoadedPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int index = context.read<PhotoData>().index;
-    PhotoData data = context.watch<AddPhotosCubit>().datas[index];
+    PhotoData data = context.read<AddPhotosCubit>().datas[index];
 
     return IconButton(
       onPressed: () {
@@ -37,7 +37,7 @@ class LoadedPhoto extends StatelessWidget {
         child: Container(
           color: _getValidationColor(
             //PhotoDataProvider.of(context).state,
-            context.select<PhotoData, PhotoState>((data) => data.state),
+            context.select<AddPhotosCubit, PhotoState>((cubit) => cubit.datas[index].state),
           ),
           child: SizedBox.square(
             dimension: _size,

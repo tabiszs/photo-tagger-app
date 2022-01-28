@@ -42,6 +42,10 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
     return true;
   }
 
+  void updateTiles() {
+    emit(AddPhotosLoaded(datas: datas));
+  }
+
   void addPhoto() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,

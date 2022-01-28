@@ -3,6 +3,7 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:photo_tagger/data/pages/add/details/tags_form_bloc.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
+import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/details/submit_button.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class DetailsBody extends StatelessWidget {
       onSuccess: (context, state) {
         int index = context.read<PhotoData>().index;
         context.read<SignedInState>().addPhotosCubit.datas[index].state = PhotoState.completed;
+        context.read<AddPhotosCubit>().updateTiles();
         Navigator.of(context).pop();
       },
       onFailure: (context, state) {
