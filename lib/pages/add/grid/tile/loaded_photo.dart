@@ -30,15 +30,12 @@ class LoadedPhoto extends StatelessWidget {
           ),
         );
       },
-      // onLongPress: //TODO - możliwe grupowanie: tagowania lub usuwania,
       icon: ClipRRect(
         borderRadius: BorderRadius.circular(_radius),
         child: Consumer<PhotoData>(builder: (context, photoData, child) {
           return Container(
             color: _getValidationColor(
               photoData.state,
-              //PhotoDataProvider.of(context).state,
-              //context.select<AddPhotosCubit, PhotoState>((cubit) => cubit.datas[index].state),
             ),
             child: SizedBox.square(
               dimension: _size,

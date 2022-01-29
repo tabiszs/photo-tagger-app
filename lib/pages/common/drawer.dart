@@ -2,11 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/service/auth_service.dart';
 import 'package:photo_tagger/data/utils/main_route_map.dart';
-import 'package:photo_tagger/pages/about/about_app_page.dart';
-import 'package:photo_tagger/pages/add/add_photos_gate.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_cubit.dart';
-import 'package:photo_tagger/pages/authenticate/sign_out_page.dart';
-import 'package:photo_tagger/pages/directory/folder_view_gate.dart';
 import 'package:provider/src/provider.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -43,26 +39,11 @@ class NavDrawer extends StatelessWidget {
                     text: 'Wyszukaj zdjęcia',
                     onClicked: () => _selectedItem(context, MainRoutingMap.searchPhotosPage),
                   ),
-                  // TODO - przeglądaj zdjęcia
-                  // _buildMenuItem(
-                  //   icon: Icons.photo_library_outlined,
-                  //   text: 'Przeglądaj zdjęcia',
-                  // ),
-                  // TODO - edytuj zdjęcie
-                  // _buildMenuItem(
-                  //   icon: Icons.mode_edit_outlined,
-                  //   text: 'Edytuj zdjęcie',
-                  // ),
                   _buildMenuItem(
                       icon: Icons.folder_open_outlined,
                       text: 'Widok folderów',
                       onClicked: () => _selectedItem(context, MainRoutingMap.folderViewPage)),
                   _buildDivier(),
-                  // TODO - ustawienia
-                  // _buildMenuItem(
-                  //   icon: Icons.settings,
-                  //   text: 'Ustawienia',
-                  // ),
                   _buildMenuItem(
                     icon: Icons.info_outlined,
                     text: 'O aplikacji',
@@ -116,25 +97,11 @@ class NavDrawer extends StatelessWidget {
       padding: _padding.add(const EdgeInsets.symmetric(vertical: 20)),
       child: Row(
         children: [
-          //TODO - on Microsoft Account
-          // CircleAvatar(
-          //   radius: 30,
-          //   backgroundImage: url == null ? null : NetworkImage(url),
-          // ),
-          // const SizedBox(width: 20),
           Flexible(
             flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //TODO - on Microsoft Account
-                // Text(
-                //   name,
-                //   overflow: TextOverflow.fade,
-                //   softWrap: false,
-                //   maxLines: 1,
-                //   style: const TextStyle(fontSize: 20, color: Colors.white),
-                // ),
                 const SizedBox(height: 4),
                 Text(
                   email,
@@ -162,7 +129,6 @@ class NavDrawer extends StatelessWidget {
     required String text,
     VoidCallback? onClicked,
   }) {
-    //TODO - get colors from theme
     final color = Colors.white;
     final hoverColor = Colors.white70;
 
@@ -180,7 +146,6 @@ class NavDrawer extends StatelessWidget {
     );
   }
 
-  //TODO zamienić na dziedziczenie
   void _selectedItem(BuildContext context, String path) {
     switch (path) {
       case MainRoutingMap.addPhotosPage:

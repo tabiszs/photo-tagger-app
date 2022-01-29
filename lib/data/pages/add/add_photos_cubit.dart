@@ -21,15 +21,12 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
   }
   final StorageService storage;
   final FirestoreService firestore;
-  late final StreamSubscription _sub;
   List<PhotoData> datas = [];
   List<TagType> tags = [];
-  bool _loadedTagTypes = false;
   String? _email;
 
   void downloadTags() async {
     tags = await firestore.downloadTags();
-    _loadedTagTypes = true;
   }
 
   List<TagType> getTagTypes() {
@@ -100,8 +97,6 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
 
     try {
       await sendPhotosAndTags();
-      // TODO - test for exeption
-      //throw Exception("xxxxxxxxx");
 
       DateTime stop = DateTime.now();
       DateTime minStop = start.add(minDuration);

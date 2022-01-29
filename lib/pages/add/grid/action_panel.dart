@@ -16,31 +16,3 @@ class AddPhotoButton extends StatelessWidget {
     );
   }
 }
-
-class TagAndDelPhotoButtons extends StatelessWidget {
-  const TagAndDelPhotoButtons({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        FloatingActionButton(
-          onPressed: () => {
-            //TODO - usuń zdjęcia wraz z tagami.
-          },
-          tooltip: Msg.remove,
-          child: const Icon(Icons.remove),
-        ),
-        const SizedBox(width: 10),
-        FloatingActionButton(
-          onPressed: () => {
-            //TODO - przejdź do formularza tagów
-          },
-          tooltip: Msg.edit,
-          child: const Icon(Icons.label_outline),
-        ),
-      ],
-    );
-  }
-}
