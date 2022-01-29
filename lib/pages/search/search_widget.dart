@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/data/pages/search/search_cubit.dart';
+import 'package:photo_tagger/data/pages/search/search_msg.dart';
 import 'package:provider/src/provider.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -32,13 +34,13 @@ class _SearchWidgetState extends State<SearchWidget> {
                 maxLines: 1,
                 maxLength: 50,
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.search),
-                  hintText: 'Wpisz tag',
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.search),
+                  hintText: SearchMsg.fillIn,
                 ),
                 validator: (String? text) {
                   if (text == null || text.length < 3) {
-                    return 'Wpisz więcej znaków.';
+                    return SearchMsg.addMore;
                   }
                 },
                 onFieldSubmitted: (String text) => context.read<SearchCubit>().searchPhrase(text),

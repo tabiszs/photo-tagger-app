@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/data/pages/add/details/tags_form_bloc.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/data/tag/tag_type.dart';
@@ -33,7 +34,7 @@ class TaggerFormPage extends StatelessWidget {
             ),
             child: Scaffold(
               appBar: AppBar(
-                title: Text('Zdjęcie ' + data.index.toString()),
+                title: Text(Msg.photo + ' ' + data.index.toString()),
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () => Navigator.of(context).pop(),

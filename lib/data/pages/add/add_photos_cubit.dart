@@ -7,7 +7,7 @@ import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/data/photo/tag_info.dart';
 import 'package:photo_tagger/data/service/storage_service.dart';
 import 'package:photo_tagger/data/tag/tag_type.dart';
-import 'package:photo_tagger/pages/add/add_photos_states.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_states.dart';
 
 class AddPhotosCubit extends Cubit<AddPhotosState> {
   AddPhotosCubit({

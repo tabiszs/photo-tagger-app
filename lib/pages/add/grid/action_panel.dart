@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:provider/src/provider.dart';
+import 'package:photo_tagger/data/messages.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 
 class AddPhotoButton extends StatelessWidget {
   const AddPhotoButton({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class AddPhotoButton extends StatelessWidget {
     return FloatingActionButton(
       // onPressed: () => context.read<AddPhotosCubit>().addPhoto(),
       onPressed: () => BlocProvider.of<AddPhotosCubit>(context).addPhoto(),
-      tooltip: 'Dodaj',
+      tooltip: Msg.add,
       child: const Icon(Icons.add),
     );
   }
@@ -29,7 +29,7 @@ class TagAndDelPhotoButtons extends StatelessWidget {
           onPressed: () => {
             //TODO - usuń zdjęcia wraz z tagami.
           },
-          tooltip: 'Usuń',
+          tooltip: Msg.remove,
           child: const Icon(Icons.remove),
         ),
         const SizedBox(width: 10),
@@ -37,7 +37,7 @@ class TagAndDelPhotoButtons extends StatelessWidget {
           onPressed: () => {
             //TODO - przejdź do formularza tagów
           },
-          tooltip: 'Edytuj tag',
+          tooltip: Msg.edit,
           child: const Icon(Icons.label_outline),
         ),
       ],

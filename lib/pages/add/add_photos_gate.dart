@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
-import 'package:photo_tagger/pages/add/add_photos_states.dart';
+import 'package:photo_tagger/data/messages.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_states.dart';
 import 'package:photo_tagger/pages/add/details/add_item_dialog.dart';
 import 'package:photo_tagger/pages/add/failure/failure_page.dart';
 import 'package:photo_tagger/pages/add/ready_to_send_page.dart';
@@ -18,7 +19,7 @@ import 'package:provider/provider.dart';
 
 class AddPhotosGate extends StatelessWidget {
   const AddPhotosGate({Key? key}) : super(key: key);
-  static String title = 'Dodawanie zdjęć';
+  static String title = Msg.addingPhotos;
 
   @override
   Widget build(BuildContext context) {

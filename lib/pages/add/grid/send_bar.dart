@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/messages.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/common/bar.dart';
 import 'package:provider/src/provider.dart';
 
@@ -14,7 +14,7 @@ class SendBar extends MainBar {
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.send),
-          tooltip: 'Prześlij zdjęcia',
+          tooltip: Msg.sendPhotos,
           onPressed: () => validateAndSend(context),
         ),
       ],

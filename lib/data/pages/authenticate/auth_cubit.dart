@@ -5,7 +5,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:photo_tagger/data/service/auth_service.dart';
 import 'package:photo_tagger/data/service/firestore_service.dart';
 import 'package:photo_tagger/data/service/storage_service.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {

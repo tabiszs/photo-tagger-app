@@ -1,4 +1,5 @@
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:photo_tagger/data/pages/add/details/tags_msg.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/data/photo/tag_info.dart';
 import 'package:photo_tagger/data/tag/tag_type.dart';
@@ -111,7 +112,7 @@ class TagsFormBloc extends FormBloc<String, String> {
       checkForms();
       emitSuccess(canSubmitAgain: true);
     } catch (e) {
-      emitFailure(failureResponse: 'Uzupełnij dane');
+      emitFailure(failureResponse: TagsMsg.fillData);
     }
   }
 
@@ -129,19 +130,19 @@ class TagsFormBloc extends FormBloc<String, String> {
   void checkForms() {
     bool error = false;
     if (authorTextFieldBloc.value.length < 3) {
-      addErrorFor(authorTextFieldBloc, 'Zbyt krótka nazwa!');
+      addErrorFor(authorTextFieldBloc, TagsMsg.tooShort);
       error = true;
     }
     if (authorTextFieldBloc.value == '') {
-      addErrorFor(authorTextFieldBloc, 'Pole nie może być puste!');
+      addErrorFor(authorTextFieldBloc, TagsMsg.canNotEmpty);
       error = true;
     }
     if (creationDateTime.value == null) {
-      addErrorFor(creationDateTime, 'Pole nie może być puste!');
+      addErrorFor(creationDateTime, TagsMsg.canNotEmpty);
       error = true;
     }
     if (error) {
-      throw Exception('Nie poprawne dane');
+      throw Exception(TagsMsg.notValidData);
     }
   }
 }

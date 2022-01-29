@@ -4,6 +4,7 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_tagger/common/loading_photo.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/data/utils/photo_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -47,7 +48,7 @@ class CachedImage extends StatelessWidget {
   }
 
   Future<void> saveImage(BuildContext context, String url) async {
-    const snackBar = SnackBar(content: Text('Pobieram zdjęcie.'));
+    var snackBar = SnackBar(content: Text(Msg.downloadPhoto));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
     if (await Vibrate.canVibrate) {
       var _type = FeedbackType.success;

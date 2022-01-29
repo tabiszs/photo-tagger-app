@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/data/pages/search/search_cubit.dart';
 import 'package:photo_tagger/data/pages/search/search_state.dart';
 import 'package:photo_tagger/data/service/firestore_service.dart';
@@ -20,7 +21,7 @@ class SearchPhotosPage extends StatelessWidget {
         storage: context.read<StorageService>(),
       ),
       child: AppViewScaffold(
-        bar: const MainBar(title: 'Wyszukaj zdjęcia'),
+        bar: MainBar(title: Msg.searchPhoto),
         bodyWidget: BlocBuilder<SearchCubit, SearchState>(builder: (context, state) {
           if (state is InitialSearchState) {
             return const SearchWidget();
@@ -38,7 +39,7 @@ class SearchPhotosPage extends StatelessWidget {
               ],
             );
           } else {
-            throw Exception('Nie znany Search State');
+            throw Exception('Unknown Search State');
           }
         }),
       ),

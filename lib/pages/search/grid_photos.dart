@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/pages/common/cached_image.dart';
 import 'package:photo_tagger/pages/directory/photo/photo_view_page.dart';
 
@@ -9,7 +10,7 @@ class GridPhotos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return urls.isEmpty
-        ? const Center(child: Text('Nie znaleziono zdjęć o podanym tagu.'))
+        ? Center(child: Text(Msg.noFoundPhoto))
         : GridView(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,

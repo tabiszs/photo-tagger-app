@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/pages/authenticate/auth_gate.dart';
 
 class RootAppPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class RootAppPage extends StatelessWidget {
             bodyText1: TextStyle(color: Colors.white),
             bodyText2: TextStyle(color: Colors.black),
           )),
-      title: 'Biblioteka Zdjęć',
+      title: Msg.photoLibrary,
       home: const AuthGate(),
     );
   }
