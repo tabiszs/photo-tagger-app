@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/pages/add/add_photos_gate.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 import 'package:photo_tagger/pages/browse/browse_photos_page.dart';
-import 'package:photo_tagger/pages/browse/search_photos_page.dart';
+import 'package:photo_tagger/pages/search/search_photos_page.dart';
 import 'package:photo_tagger/pages/directory/folder_view_gate.dart';
 import 'package:photo_tagger/pages/edit/edit_photo_page.dart';
 import 'package:photo_tagger/pages/about/about_app_page.dart';

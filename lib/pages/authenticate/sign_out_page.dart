@@ -69,7 +69,7 @@ class _LogInFormWidgetState extends State<LogInFormWidget> {
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: 'Adres e-mail: @skauci-europy.pl',
-                      errorText: correctDomain == null
+                      errorText: correctDomain == true
                           ? null
                           : (correctDomain! ? null : "Niepoprawna domena."),
                     ),

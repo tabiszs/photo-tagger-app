@@ -52,7 +52,7 @@ class _FolderViewPageState extends State<FolderViewPage> {
       MaterialPageRoute(
         builder: (BuildContext context) => PhotoViewPage(
           index: index,
-          cubit: cubit,
+          urls: cubit.urls,
         ),
       ),
     );

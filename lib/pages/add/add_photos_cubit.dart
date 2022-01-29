@@ -129,7 +129,8 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
   }
 
   Future<String?> uploadPhoto(int i) async {
-    return await storage.uploadFile(datas[i]);
+    String? path = await storage.uploadFile(datas[i]);
+    return path;
   }
 
   void addLastTags(int i, String pathInCloud) {
@@ -139,7 +140,7 @@ class AddPhotosCubit extends Cubit<AddPhotosState> {
   }
 
   Future<void> uploadTags(int i) async {
-    firestore.uploadTags(datas[i]);
+    await firestore.uploadTags(datas[i]);
   }
 
   void returnAddPhotosLoaded() {

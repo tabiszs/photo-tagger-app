@@ -41,6 +41,7 @@ class NavDrawer extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.image_search_outlined,
                     text: 'Wyszukaj zdjęcia',
+                    onClicked: () => _selectedItem(context, MainRoutingMap.searchPhotosPage),
                   ),
                   // TODO - przeglądaj zdjęcia
                   // _buildMenuItem(
@@ -184,6 +185,9 @@ class NavDrawer extends StatelessWidget {
     switch (path) {
       case MainRoutingMap.addPhotosPage:
         Navigator.of(context).pushReplacementNamed(MainRoutingMap.addPhotosPage);
+        break;
+      case MainRoutingMap.searchPhotosPage:
+        Navigator.of(context).pushReplacementNamed(MainRoutingMap.searchPhotosPage);
         break;
       case MainRoutingMap.folderViewPage:
         Navigator.of(context).pushReplacementNamed(MainRoutingMap.folderViewPage);

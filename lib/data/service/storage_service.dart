@@ -15,7 +15,7 @@ class StorageService {
 
     try {
       var referece = _storage.ref(path);
-      referece.putFile(file);
+      await referece.putFile(file);
       return referece.fullPath;
     } on FirebaseException catch (e) {
       rethrow;
@@ -52,5 +52,15 @@ class StorageService {
     } on FirebaseException catch (e) {
       // e.g, e.code == 'canceled
     }
+  }
+
+  Future<List<String>> getFilesFrom(List<String> paths) async {
+    List<String> urls = [];
+    for (int i = 0; i < paths.length; ++i) {
+      String url = await _storage.ref(paths[i]).getDownloadURL();
+      urls.add(url);
+    }
+
+    return urls;
   }
 }
