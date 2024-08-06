@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 import 'package:provider/src/provider.dart';
 import 'package:rive/rive.dart';
 

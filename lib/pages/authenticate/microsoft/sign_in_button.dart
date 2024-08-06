@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photo_tagger/data/messages.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_cubit.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 
@@ -34,19 +35,6 @@ class SignInButton extends StatelessWidget {
       },
     );
   }
-
-  // void authGate(BuildContext context) async {
-  //   AuthCubit cubit = context.read<AuthCubit>();
-  //   bool signedIn = await cubit.signInWithEmailAndPassword(email.text, password.text);
-  //   if (signedIn) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute<void>(
-  //         builder: (BuildContext context) => const AuthorizedRootPage(),
-  //       ),
-  //     );
-  //   }
-  // }
 }
 
 class DefaultState extends StatelessWidget {
@@ -62,8 +50,8 @@ class DefaultState extends StatelessWidget {
           height: 20,
         ),
         const SizedBox(width: 10),
-        const Text(
-          'Zaloguj się',
+        Text(
+          Msg.logIn,
         ),
       ],
     );

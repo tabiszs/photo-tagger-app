@@ -6,12 +6,7 @@ class FirestoreService {
   FirestoreService({required firestore}) : _firestore = firestore {
     _tagPhotoRef = firestore.collection('photos');
 
-    // TODO - custom tags
     _tagRef = firestore.collection('tags');
-    // .withConverter<TagInfo>(
-    //     fromFirestore: (snapshot, _) => TagInfo.fromJson(snapshot.data()!),
-    //     toFirestore: (tags, _) => tags.toJson(),
-    //   );
   }
 
   final FirebaseFirestore _firestore;
@@ -22,8 +17,8 @@ class FirestoreService {
   Future<void> uploadTags(PhotoData data) async {
     await _tagPhotoRef
         .add(data.tags.toJson())
-        .then((value) => print("Tag Added"))
-        .catchError((error) => print("Failed to add tag: $error"));
+        .then((value) => null)
+        .catchError((error) => null);
   }
 
   Future<List<TagType>> downloadTags() async {
@@ -51,8 +46,8 @@ class FirestoreService {
           },
           SetOptions(merge: true),
         )
-        .then((value) => print("tag: ${tag} merged with existing data!"))
-        .catchError((error) => print("Failed to merge data: $error"));
+        .then((value) => null)
+        .catchError((error) => null);
   }
 
   Future<List<String>> find(String query) async {

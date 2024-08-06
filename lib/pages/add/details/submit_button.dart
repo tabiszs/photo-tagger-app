@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/messages.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({Key? key, required this.callback}) : super(key: key);
@@ -12,7 +13,7 @@ class SubmitButton extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: callback,
-          child: const Text("Zatwierdź"),
+          child: Text(Msg.submit),
         ),
       ],
     );

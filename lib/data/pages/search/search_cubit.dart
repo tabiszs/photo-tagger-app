@@ -14,7 +14,7 @@ class SearchCubit extends Cubit<SearchState> {
   final List<String> urls = [];
   static const Duration _minDuration = Duration(milliseconds: 500);
 
-  void searchPhrase(String text) async {
+  Future<void> searchPhrase(String text) async {
     emit(const SearchingState());
     DateTime start = DateTime.now();
 

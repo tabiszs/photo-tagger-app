@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/messages.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 import 'package:provider/src/provider.dart';
 
 class FailureResultPage extends StatelessWidget {
@@ -14,14 +15,14 @@ class FailureResultPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Nie udało się przesłać zdjęć. Spróbuj ponownie.',
+              Msg.tryAgain,
               style: Theme.of(context).textTheme.headline5,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
             ElevatedButton(
               onPressed: () => returnToGridView(context),
-              child: const Text('Wróć'),
+              child: Text(Msg.returnText),
             )
           ],
         ),

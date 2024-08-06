@@ -62,8 +62,7 @@ class _AddItemDialogState extends State<AddItemDialog> {
         MaterialButton(
           onPressed: () {
             if (_key.currentState!.validate()) {
-              //TODO - don't work
-              //context.read<PhotoData>().tags.activity = newItemController.text;
+
               Navigator.of(context).pop();
               // context.read<AddPhotosCubit>().showTagPage(widget.data.index);
             }

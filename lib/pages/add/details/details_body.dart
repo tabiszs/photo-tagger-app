@@ -14,11 +14,13 @@ class DetailsBody extends StatelessWidget {
     final formBloc = BlocProvider.of<TagsFormBloc>(context);
 
     return FormBlocListener<TagsFormBloc, String, String>(
+      onSubmitting: (context, state) {},
       onSuccess: (context, state) {
         context.read<PhotoData>().state = PhotoState.completed;
         Navigator.of(context).pop();
       },
       onFailure: (context, state) {
+        context.read<PhotoData>().state = PhotoState.touched;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(state.failureResponse!),

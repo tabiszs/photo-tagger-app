@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_tagger/data/photo/photo_data.dart';
 import 'package:photo_tagger/data/utils/photo_utils.dart';
 import 'package:photo_tagger/data/tag/tag_type.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/pages/add/details/tagger_form_page.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
@@ -30,15 +30,12 @@ class LoadedPhoto extends StatelessWidget {
           ),
         );
       },
-      // onLongPress: //TODO - możliwe grupowanie: tagowania lub usuwania,
       icon: ClipRRect(
         borderRadius: BorderRadius.circular(_radius),
         child: Consumer<PhotoData>(builder: (context, photoData, child) {
           return Container(
             color: _getValidationColor(
               photoData.state,
-              //PhotoDataProvider.of(context).state,
-              //context.select<AddPhotosCubit, PhotoState>((cubit) => cubit.datas[index].state),
             ),
             child: SizedBox.square(
               dimension: _size,

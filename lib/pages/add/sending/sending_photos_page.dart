@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_tagger/data/messages.dart';
 
 class SendingPhotosPage extends StatelessWidget {
   const SendingPhotosPage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class SendingPhotosPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Wysyłam zdjęcia z tagami.',
+              Msg.sendingPhotos,
               style: Theme.of(context).textTheme.headline5,
             ),
             const SizedBox(height: 15),

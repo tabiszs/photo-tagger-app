@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:photo_tagger/data/service/auth_service.dart';
 import 'package:photo_tagger/data/service/firestore_service.dart';
 import 'package:photo_tagger/data/service/storage_service.dart';
-import 'package:photo_tagger/pages/add/add_photos_cubit.dart';
+import 'package:photo_tagger/data/pages/add/add_photos_cubit.dart';
 import 'package:photo_tagger/data/pages/authenticate/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -16,18 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
     required this.firestoreService,
   }) : super(const SignedOutState()) {
     _subscription = authService.isSignedInStream.listen((isSignedInEvent) {
-      // TODO remove
-      emit(isSignedInEvent
-          ? SignedInState(
-              user: authService.currentUser,
-              addPhotosCubit: AddPhotosCubit(
-                storage: storageService,
-                firestore: firestoreService,
-                email: authService.currentUser?.email,
-              ),
-            )
-          : const SignedOutState());
-      // emit(const SignedOutState());
+      emit(const SignedOutState());
     });
   }
 
